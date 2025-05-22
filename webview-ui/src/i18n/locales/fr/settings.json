@@ -427,6 +427,10 @@
 			"name": "Utiliser le mode \"direction assistée\" expérimental",
 			"description": "Lorsqu'il est activé, Roo rappellera plus fréquemment au modèle les détails de sa définition de mode actuelle. Cela conduira à une adhérence plus forte aux définitions de rôles et aux instructions personnalisées, mais utilisera plus de tokens par message."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Activer le mode expérimental multi-outils",
+			"description": "Lorsqu'il est activé, Roo peut utiliser plusieurs outils indépendants en parallèle pour chaque message. Les résultats de tous les outils utilisés sont retournés ensemble dans la réponse de l'utilisateur. Les tâches sont réalisées étape par étape, chaque étape pouvant utiliser plusieurs outils simultanément. Cette fonctionnalité est expérimentale."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Utiliser l'outil diff multi-blocs expérimental",
 			"description": "Lorsqu'il est activé, Roo utilisera l'outil diff multi-blocs. Cela tentera de mettre à jour plusieurs blocs de code dans le fichier en une seule requête."

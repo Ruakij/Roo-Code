@@ -183,7 +183,6 @@ export class Task extends EventEmitter<ClineEvents> {
 	userMessageContent: (Anthropic.TextBlockParam | Anthropic.ImageBlockParam)[] = []
 	userMessageContentReady = false
 	didRejectTool = false
-	didAlreadyUseTool = false
 	didCompleteReadingStream = false
 
 	constructor({
@@ -1178,7 +1177,6 @@ export class Task extends EventEmitter<ClineEvents> {
 			this.userMessageContent = []
 			this.userMessageContentReady = false
 			this.didRejectTool = false
-			this.didAlreadyUseTool = false
 			this.presentAssistantMessageLocked = false
 			this.presentAssistantMessageHasPendingUpdates = false
 
@@ -1253,16 +1251,6 @@ export class Task extends EventEmitter<ClineEvents> {
 						// present iterator to finish and set
 						// userMessageContentReady when its ready.
 						// this.userMessageContentReady = true
-						break
-					}
-
-					// PREV: We need to let the request finish for openrouter to
-					// get generation details.
-					// UPDATE: It's better UX to interrupt the request at the
-					// cost of the API cost not being retrieved.
-					if (this.didAlreadyUseTool) {
-						assistantMessage +=
-							"\n\n[Response interrupted by a tool use result. Only one tool may be used at a time and should be placed at the end of the message.]"
 						break
 					}
 				}

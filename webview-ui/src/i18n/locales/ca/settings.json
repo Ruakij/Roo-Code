@@ -427,6 +427,10 @@
 			"name": "Utilitzar mode \"direcció assistida\" experimental",
 			"description": "Quan està activat, Roo recordarà al model els detalls de la seva definició de mode actual amb més freqüència. Això portarà a una adherència més forta a les definicions de rol i instruccions personalitzades, però utilitzarà més tokens per missatge."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Utilitza el mode experimental de múltiples eines",
+			"description": "Si s'activa, Roo pot utilitzar diverses eines independents per missatge en paral·lel. Els resultats de totes les eines utilitzades es retornen conjuntament en la resposta de l'usuari. Les tasques s'executen pas a pas, i cada pas pot utilitzar diverses eines alhora. Aquesta funció és experimental."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Utilitzar eina diff de blocs múltiples experimental",
 			"description": "Quan està activat, Roo utilitzarà l'eina diff de blocs múltiples. Això intentarà actualitzar múltiples blocs de codi a l'arxiu en una sola petició."

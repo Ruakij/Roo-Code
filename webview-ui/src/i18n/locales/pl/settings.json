@@ -427,6 +427,10 @@
 			"name": "Użyj eksperymentalnego trybu \"wspomagania kierownicy\"",
 			"description": "Po włączeniu, Roo będzie częściej przypominać modelowi o szczegółach jego bieżącej definicji trybu. Doprowadzi to do silniejszego przestrzegania definicji ról i niestandardowych instrukcji, ale będzie używać więcej tokenów na wiadomość."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Włącz eksperymentalny tryb wielu narzędzi",
+			"description": "Po włączeniu Roo może używać kilku niezależnych narzędzi równolegle w jednej wiadomości. Wyniki wszystkich użytych narzędzi są zwracane razem w odpowiedzi dla użytkownika. Zadania są realizowane krok po kroku, a każdy krok może wykorzystywać kilka narzędzi jednocześnie. Funkcja ta jest eksperymentalna."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Użyj eksperymentalnego narzędzia diff wieloblokowego",
 			"description": "Po włączeniu, Roo użyje narzędzia diff wieloblokowego. Spróbuje to zaktualizować wiele bloków kodu w pliku w jednym żądaniu."

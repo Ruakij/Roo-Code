@@ -1,13 +1,17 @@
-export function getSharedToolUseSection(): string {
+export function getSharedToolUseSection(enableMultiToolCalls: boolean): string {
 	return `====
 
 TOOL USE
 
-You have access to a set of tools that are executed upon the user's approval. You can use one tool per message, and will receive the result of that tool use in the user's response. You use tools step-by-step to accomplish a given task, with each tool use informed by the result of the previous tool use.
+You have access to a set of tools that are executed upon the user's approval. ${
+		enableMultiToolCalls
+			? "You can use multiple independent tools per message, and will receive the result of all tool uses, in the user's response. You accomplish tasks step-by-step, with each step potentially using multiple tools in parallel."
+			: "You can use one tool per message, and will receive the result of that tool use in the user's response. You use tools step-by-step to accomplish a given task, with each tool use informed by the result of the previous tool use."
+	}
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>

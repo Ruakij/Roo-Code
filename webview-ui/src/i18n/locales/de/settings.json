@@ -427,6 +427,10 @@
 			"name": "Experimentellen \"Servolenkung\"-Modus verwenden",
 			"description": "Wenn aktiviert, wird Roo das Modell häufiger an die Details seiner aktuellen Modusdefinition erinnern. Dies führt zu einer stärkeren Einhaltung von Rollendefinitionen und benutzerdefinierten Anweisungen, verwendet aber mehr Tokens pro Nachricht."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Experimentellen \"Multi-tool\"-Modus verwenden",
+			"description": "Wenn aktiviert, kann Roo mehrere unabhängige Tools pro Nachricht parallel verwenden. Die Ergebnisse aller genutzten Tools werden gemeinsam in der Benutzerantwort zurückgegeben. Aufgaben werden schrittweise ausgeführt, wobei jeder Schritt mehrere Tools gleichzeitig nutzen kann. Diese Funktion ist experimentell."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Experimentelles Multi-Block-Diff-Werkzeug verwenden",
 			"description": "Wenn aktiviert, verwendet Roo das Multi-Block-Diff-Werkzeug. Dies versucht, mehrere Codeblöcke in der Datei in einer Anfrage zu aktualisieren."

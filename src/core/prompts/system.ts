@@ -8,6 +8,7 @@ import {
 	getModeBySlug,
 	getGroupName,
 } from "../../shared/modes"
+import { EXPERIMENT_IDS, experiments as Experiments } from "../../shared/experiments"
 import { PromptVariables, loadSystemPromptFile } from "./sections/custom-system-prompt"
 import { DiffStrategy } from "../../shared/tools"
 import { McpHub } from "../../services/mcp/McpHub"
@@ -63,24 +64,25 @@ async function generatePrompt(
 			: Promise.resolve(""),
 	])
 
+	const enableMultiToolCalls = Experiments.isEnabled(experiments ?? {}, EXPERIMENT_IDS.ENABLE_MULTI_TOOL_CALLS)
+
 	const basePrompt = `${roleDefinition}
+	${markdownFormattingSection()}
 
-${markdownFormattingSection()}
-
-${getSharedToolUseSection()}
+${getSharedToolUseSection(enableMultiToolCalls)}
 
 ${getToolDescriptionsForMode(
-	mode,
-	cwd,
-	supportsComputerUse,
-	effectiveDiffStrategy,
-	browserViewportSize,
-	mcpHub,
-	customModeConfigs,
-	experiments,
-)}
+		mode,
+		cwd,
+		supportsComputerUse,
+		effectiveDiffStrategy,
+		browserViewportSize,
+		mcpHub,
+		customModeConfigs,
+		experiments,
+	)}
 
-${getToolUseGuidelinesSection()}
+${getToolUseGuidelinesSection(enableMultiToolCalls)}
 
 ${mcpServersSection}
 

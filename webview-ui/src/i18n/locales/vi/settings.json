@@ -427,6 +427,10 @@
 			"name": "Sử dụng chế độ \"power steering\" thử nghiệm",
 			"description": "Khi được bật, Roo sẽ nhắc nhở mô hình về chi tiết định nghĩa chế độ hiện tại thường xuyên hơn. Điều này sẽ dẫn đến việc tuân thủ chặt chẽ hơn các định nghĩa vai trò và hướng dẫn tùy chỉnh, nhưng sẽ sử dụng nhiều token hơn cho mỗi tin nhắn."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Bật chế độ thử nghiệm gọi nhiều công cụ",
+			"description": "Khi bật, Roo có thể sử dụng nhiều công cụ độc lập cùng lúc trong mỗi tin nhắn. Kết quả của tất cả công cụ sẽ được trả về cùng nhau trong phản hồi của người dùng. Các tác vụ được thực hiện từng bước, mỗi bước có thể sử dụng nhiều công cụ song song. Tính năng này hiện đang thử nghiệm."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Sử dụng công cụ diff đa khối thử nghiệm",
 			"description": "Khi được bật, Roo sẽ sử dụng công cụ diff đa khối. Điều này sẽ cố gắng cập nhật nhiều khối mã trong tệp trong một yêu cầu."
