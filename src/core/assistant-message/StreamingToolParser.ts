@@ -212,8 +212,11 @@ export class StreamingToolParser extends EventEmitter {
 
 		// Emit final text if stream ends in Text state
 		if (finalStateType === ParseStateEnum.Text && this.context.textBuffer) {
-			this.context.emitBlock({ type: "text", content: this.context.textBuffer, partial: false })
-			this.context.textBuffer = ""
+			const normalizedText = this.context.textBuffer.trim()
+			if (normalizedText) {
+				this.context.emitBlock({ type: "text", content: normalizedText, partial: false })
+				this.context.textBuffer = ""
+			}
 		}
 
 		// Reset parser state
@@ -227,7 +230,10 @@ export class StreamingToolParser extends EventEmitter {
 		const currentStateType = this.currentState.getStateType()
 
 		if (currentStateType === ParseStateEnum.Text && this.context.textBuffer) {
-			this.context.emitBlock({ type: "text", content: this.context.textBuffer, partial: true })
+			const normalizedText = this.context.textBuffer.trim()
+			if (normalizedText) {
+				this.context.emitBlock({ type: "text", content: normalizedText, partial: true })
+			}
 		}
 		// Emit partial tool blocks for any active tool state
 		else if (this.context.currentToolUse) {
@@ -259,8 +265,11 @@ class TextState implements ParserState {
 	processChar(context: ParserContext, char: string): ParserState {
 		if (char === "<") {
 			if (context.textBuffer) {
-				context.emitBlock({ type: "text", content: context.textBuffer, partial: false })
-				context.textBuffer = ""
+				const normalizedText = context.textBuffer.trim()
+				if (normalizedText) {
+					context.emitBlock({ type: "text", content: normalizedText, partial: false })
+					context.textBuffer = ""
+				}
 			}
 			context.tagBuffer = ""
 			return tagOpeningState
@@ -269,7 +278,6 @@ class TextState implements ParserState {
 			if (!/\s/.test(char)) {
 				context.emitError(`Unexpected character "${char}" outside of allowed text content`)
 				context.textBuffer += char
-				return this
 			}
 		} else {
 			context.textBuffer += char
@@ -333,8 +341,6 @@ class TagNameState implements ParserState {
 		if (char !== ">" && !/\s/.test(char)) {
 			context.tagBuffer += char
 
-			console.log("TagNameState buffer:", context.tagBuffer)
-
 			// Check if the current buffer could still match any valid child tag
 			if (!context.hasChildSchemaWithPrefix(context.tagBuffer)) {
 				return this.handleInvalidTag(context, char)
@@ -352,7 +358,8 @@ class TagNameState implements ParserState {
 				if (char === ">") {
 					return this.handleValidTag(context, exactMatch)
 				} else if (/\s/.test(char)) {
-					// Whitespace is not supported in our tag syntax
+					// Whitespace after a tag name (e.g., in an attribute)
+					context.emitError("Unexpected whitespace in parameter tag")
 					return this.handleInvalidTag(context, char)
 				}
 			} else {
@@ -395,9 +402,12 @@ class TagNameState implements ParserState {
 	}
 
 	private handleInvalidTag(context: ParserContext, char: string): ParserState {
+		// Check if this is attempting to be a tool tag but invalid
+		const isAtRootLevel = context.currentNode === context.rootNode
+
 		if (context.relaxedMode) {
 			// In relaxed mode, treat invalid tag as text content
-			if (context.currentNode === context.rootNode) {
+			if (isAtRootLevel) {
 				context.textBuffer += `<${context.tagBuffer}${char}`
 				context.tagBuffer = ""
 				return textState
@@ -407,14 +417,20 @@ class TagNameState implements ParserState {
 				return textContentState
 			}
 		} else {
-			// In strict mode, emit an error
-			context.emitError(`Invalid tag name: ${context.tagBuffer} in ${context.currentNode.name}`)
-
-			if (context.currentNode === context.rootNode) {
+			// In strict mode, emit an appropriate error
+			if (isAtRootLevel) {
+				context.emitError(`Invalid tool name: ${context.tagBuffer}`)
 				context.textBuffer += `<${context.tagBuffer}${char}`
 				context.tagBuffer = ""
 				return textState
+			} else if (context.currentNode.parent === context.rootNode) {
+				// Invalid parameter name for a tool
+				context.emitError(`Invalid param name: ${context.tagBuffer} for tool ${context.currentNode.name}`)
+				context.paramValueBuffer += `<${context.tagBuffer}${char}`
+				context.tagBuffer = ""
+				return textContentState
 			} else if (context.canContainText()) {
+				context.emitError(`Invalid tag name: ${context.tagBuffer} in ${context.currentNode.name}`)
 				context.paramValueBuffer += `<${context.tagBuffer}${char}`
 				context.tagBuffer = ""
 				return textContentState
@@ -439,13 +455,24 @@ class TextContentState implements ParserState {
 	processChar(context: ParserContext, char: string): ParserState {
 		if (char === "<") {
 			// This might be a closing tag or a nested tag
+			context.tagBuffer = "" // Reset tag buffer before transitioning
 			return tagOpeningState
 		} else {
 			// Collect text content - either for parameter values or other text content
 			if (context.currentParamName) {
+				// We're collecting parameter value
 				context.paramValueBuffer += char
+			} else if (context.canContainText()) {
+				// This node allows direct text content
+				context.textBuffer += char
+			} else if (/\s/.test(char)) {
+				// Allow whitespace characters (spaces and newlines) in tool contexts
+				// We silently ignore these to make the parser more flexible
+				return this
 			} else {
-				// This handles cases where a tool might directly contain text
+				// We're in a tool context that doesn't allow direct text
+				context.emitError(`Unexpected character "${char}" in ${context.currentNode.name} context`)
+				// Try to recover by treating as text
 				context.textBuffer += char
 			}
 			return this
@@ -547,7 +574,7 @@ class ClosingTagState implements ParserState {
 				return textState
 			} else {
 				// Otherwise, we're inside a parent tag
-				return tagOpeningState
+				return textContentState
 			}
 		}
 
