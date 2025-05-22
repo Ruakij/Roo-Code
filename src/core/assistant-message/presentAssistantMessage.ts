@@ -4,7 +4,7 @@ import { serializeError } from "serialize-error"
 import type { ToolName } from "../../schemas"
 
 import { defaultModeSlug, getModeBySlug } from "../../shared/modes"
-import type { ToolParamName, ToolResponse } from "../../shared/tools"
+import type { TextContent, ToolParamName, ToolResponse, ToolUse } from "../../shared/tools"
 import type { ClineAsk, ToolProgressStatus } from "../../shared/ExtensionMessage"
 
 import { telemetryService } from "../../services/telemetry/TelemetryService"
@@ -49,6 +49,8 @@ import { Task } from "../task/Task"
  * API response pattern, where content arrives incrementally and needs to be processed
  * as it becomes available.
  */
+
+export type AssistantMessageContent = TextContent | ToolUse
 
 export async function presentAssistantMessage(cline: Task) {
 	if (cline.abort) {
@@ -191,6 +193,8 @@ export async function presentAssistantMessage(cline: Task) {
 						const modeName = getModeBySlug(mode, customModes)?.name ?? mode
 						return `[${block.name} in ${modeName} mode: '${message}']`
 					}
+					default:
+						return `[${block.name}]`
 				}
 			}
 

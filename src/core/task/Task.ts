@@ -32,7 +32,7 @@ import { getApiMetrics } from "../../shared/getApiMetrics"
 import { HistoryItem } from "../../shared/HistoryItem"
 import { ClineAskResponse } from "../../shared/WebviewMessage"
 import { defaultModeSlug } from "../../shared/modes"
-import { DiffStrategy } from "../../shared/tools"
+import { TOOL_DISPLAY_NAMES, toolParamNames, TextContent, ToolUse, ToolParamName, DiffStrategy } from "../../shared/tools"
 
 // services
 import { UrlContentFetcher } from "../../services/browser/UrlContentFetcher"
@@ -60,7 +60,8 @@ import { SYSTEM_PROMPT } from "../prompts/system"
 import { ToolRepetitionDetector } from "../tools/ToolRepetitionDetector"
 import { FileContextTracker } from "../context-tracking/FileContextTracker"
 import { RooIgnoreController } from "../ignore/RooIgnoreController"
-import { type AssistantMessageContent, parseAssistantMessage, presentAssistantMessage } from "../assistant-message"
+import { presentAssistantMessage } from "../assistant-message"
+import { StreamingToolParser } from "../assistant-message/StreamingToolParser"
 import { truncateConversationIfNeeded } from "../sliding-window"
 import { ClineProvider } from "../webview/ClineProvider"
 import { MultiSearchReplaceDiffStrategy } from "../diff/strategies/multi-search-replace"
@@ -78,6 +79,7 @@ import { processUserContentMentions } from "../mentions/processUserContentMentio
 import { ApiMessage } from "../task-persistence/apiMessages"
 import { getMessagesSinceLastSummary, summarizeConversation } from "../condense"
 import { maybeRemoveImageBlocks } from "../../api/transform/image-cleaning"
+import { AssistantMessageContent } from "../assistant-message/presentAssistantMessage"
 
 export type ClineEvents = {
 	message: [{ action: "created" | "updated"; message: ClineMessage }]
@@ -612,8 +614,7 @@ export class Task extends EventEmitter<ClineEvents> {
 	async sayAndCreateMissingParamError(toolName: ToolName, paramName: string, relPath?: string) {
 		await this.say(
 			"error",
-			`Roo tried to use ${toolName}${
-				relPath ? ` for '${relPath.toPosix()}'` : ""
+			`Roo tried to use ${toolName}${relPath ? ` for '${relPath.toPosix()}'` : ""
 			} without value for required parameter '${paramName}'. Retrying...`,
 		)
 		return formatResponse.toolError(formatResponse.missingToolParameterError(paramName))
@@ -886,10 +887,9 @@ export class Task extends EventEmitter<ClineEvents> {
 		newUserContent.push({
 			type: "text",
 			text:
-				`[TASK RESUMPTION] This task was interrupted ${agoText}. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. If the task has not been completed, retry the last step before interruption and proceed with completing the task.\n\nNote: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.${
-					wasRecent
-						? "\n\nIMPORTANT: If the last tool use was a write_to_file that was interrupted, the file was reverted back to its original state before the interrupted edit, and you do NOT need to re-read the file as you already have its up-to-date contents."
-						: ""
+				`[TASK RESUMPTION] This task was interrupted ${agoText}. It may or may not be complete, so please reassess the task context. Be aware that the project state may have changed since then. If the task has not been completed, retry the last step before interruption and proceed with completing the task.\n\nNote: If you previously attempted a tool use that the user did not provide a result for, you should assume the tool use was not successful and assess whether you should retry. If the last tool was a browser_action, the browser has been closed and you must launch a new browser if needed.${wasRecent
+					? "\n\nIMPORTANT: If the last tool use was a write_to_file that was interrupted, the file was reverted back to its original state before the interrupted edit, and you do NOT need to re-read the file as you already have its up-to-date contents."
+					: ""
 				}` +
 				(responseText
 					? `\n\nNew instructions for task continuation:\n<user_message>\n${responseText}\n</user_message>`
@@ -999,6 +999,42 @@ export class Task extends EventEmitter<ClineEvents> {
 		userContent: Anthropic.Messages.ContentBlockParam[],
 		includeFileDetails: boolean = false,
 	): Promise<boolean> {
+		// Create typed sets for validation
+		const toolNames = new Set(Object.keys(TOOL_DISPLAY_NAMES) as ToolName[])
+		const validParamNamesByTool = new Map(
+			[...toolNames].map((toolName) => [toolName, new Set(toolParamNames) as Set<ToolParamName>]),
+		)
+
+		const parser = new StreamingToolParser({
+			validToolNames: toolNames,
+			validParamNamesByTool,
+			relaxedMode: true,
+		})
+
+		// Set up event listeners for parser
+		parser.on("block", (block: TextContent | ToolUse) => {
+			if (this.abort) return
+			console.log("Parser block:", block)
+
+			const lastBlock = this.assistantMessageContent.at(-1)
+
+			// Check if the new block is a partial update of the last block
+			if (lastBlock?.partial) {
+				// Update the last block instead of pushing a new one
+				this.assistantMessageContent[this.assistantMessageContent.length - 1] = block
+			} else {
+				this.assistantMessageContent.push(block)
+			}
+
+			presentAssistantMessage(this)
+		})
+
+		parser.on("error", (error: Error) => {
+			console.error("Parser error:", error)
+			console.log("Parser error:", error.message)
+			this.say("error", error.message)
+		})
+
 		if (this.abort) {
 			throw new Error(`[RooCode#recursivelyMakeRooRequests] task ${this.taskId}.${this.instanceId} aborted`)
 		}
@@ -1151,10 +1187,9 @@ export class Task extends EventEmitter<ClineEvents> {
 							type: "text",
 							text:
 								assistantMessage +
-								`\n\n[${
-									cancelReason === "streaming_failed"
-										? "Response interrupted by API Error"
-										: "Response interrupted by user"
+								`\n\n[${cancelReason === "streaming_failed"
+									? "Response interrupted by API Error"
+									: "Response interrupted by user"
 								}]`,
 						},
 					],
@@ -1215,7 +1250,7 @@ export class Task extends EventEmitter<ClineEvents> {
 
 							// Parse raw assistant message into content blocks.
 							const prevLength = this.assistantMessageContent.length
-							this.assistantMessageContent = parseAssistantMessage(assistantMessage)
+							parser.processChunk(chunk.text)
 
 							if (this.assistantMessageContent.length > prevLength) {
 								// New content we need to present, reset to
@@ -1253,6 +1288,7 @@ export class Task extends EventEmitter<ClineEvents> {
 						// this.userMessageContentReady = true
 						break
 					}
+
 				}
 			} catch (error) {
 				// Abandoned happens when extension is no longer waiting for the
@@ -1296,6 +1332,8 @@ export class Task extends EventEmitter<ClineEvents> {
 			// and eventually set userMessageContentReady to true.)
 			const partialBlocks = this.assistantMessageContent.filter((block) => block.partial)
 			partialBlocks.forEach((block) => (block.partial = false))
+
+			parser.finalize()
 
 			// Can't just do this b/c a tool could be in the middle of executing.
 			// this.assistantMessageContent.forEach((e) => (e.partial = false))

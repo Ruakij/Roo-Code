@@ -4,58 +4,58 @@
 type GlobalSettings = {
 	currentApiConfigName?: string | undefined
 	listApiConfigMeta?:
-		| {
-				id: string
-				name: string
-				apiProvider?:
-					| (
-							| "anthropic"
-							| "glama"
-							| "openrouter"
-							| "bedrock"
-							| "vertex"
-							| "openai"
-							| "ollama"
-							| "vscode-lm"
-							| "lmstudio"
-							| "gemini"
-							| "openai-native"
-							| "mistral"
-							| "deepseek"
-							| "unbound"
-							| "requesty"
-							| "human-relay"
-							| "fake-ai"
-							| "xai"
-							| "groq"
-							| "chutes"
-							| "litellm"
-					  )
-					| undefined
-		  }[]
+	| {
+		id: string
+		name: string
+		apiProvider?:
+		| (
+			| "anthropic"
+			| "glama"
+			| "openrouter"
+			| "bedrock"
+			| "vertex"
+			| "openai"
+			| "ollama"
+			| "vscode-lm"
+			| "lmstudio"
+			| "gemini"
+			| "openai-native"
+			| "mistral"
+			| "deepseek"
+			| "unbound"
+			| "requesty"
+			| "human-relay"
+			| "fake-ai"
+			| "xai"
+			| "groq"
+			| "chutes"
+			| "litellm"
+		)
 		| undefined
+	}[]
+	| undefined
 	pinnedApiConfigs?:
-		| {
-				[x: string]: boolean
-		  }
-		| undefined
+	| {
+		[x: string]: boolean
+	}
+	| undefined
 	lastShownAnnouncementId?: string | undefined
 	customInstructions?: string | undefined
 	taskHistory?:
-		| {
-				id: string
-				number: number
-				ts: number
-				task: string
-				tokensIn: number
-				tokensOut: number
-				cacheWrites?: number | undefined
-				cacheReads?: number | undefined
-				totalCost: number
-				size?: number | undefined
-				workspace?: string | undefined
-		  }[]
-		| undefined
+	| {
+		id: string
+		number: number
+		ts: number
+		task: string
+		tokensIn: number
+		tokensOut: number
+		cacheWrites?: number | undefined
+		cacheReads?: number | undefined
+		totalCost: number
+		size?: number | undefined
+		workspace?: string | undefined
+	}[]
+	| undefined
 	autoApprovalEnabled?: boolean | undefined
 	alwaysAllowReadOnly?: boolean | undefined
 	alwaysAllowReadOnlyOutsideWorkspace?: boolean | undefined
@@ -101,78 +101,78 @@ type GlobalSettings = {
 	diffEnabled?: boolean | undefined
 	fuzzyMatchThreshold?: number | undefined
 	experiments?:
-		| {
-				autoCondenseContext: boolean
-				powerSteering: boolean
-				enableMultiToolCalls: boolean
-		  }
-		| undefined
+	| {
+		autoCondenseContext: boolean
+		powerSteering: boolean
+		enableMultiToolCalls: boolean
+	}
+	| undefined
 	language?:
-		| (
-				| "ca"
-				| "de"
-				| "en"
-				| "es"
-				| "fr"
-				| "hi"
-				| "it"
-				| "ja"
-				| "ko"
-				| "nl"
-				| "pl"
-				| "pt-BR"
-				| "ru"
-				| "tr"
-				| "vi"
-				| "zh-CN"
-				| "zh-TW"
-		  )
-		| undefined
+	| (
+		| "ca"
+		| "de"
+		| "en"
+		| "es"
+		| "fr"
+		| "hi"
+		| "it"
+		| "ja"
+		| "ko"
+		| "nl"
+		| "pl"
+		| "pt-BR"
+		| "ru"
+		| "tr"
+		| "vi"
+		| "zh-CN"
+		| "zh-TW"
+	)
+	| undefined
 	telemetrySetting?: ("unset" | "enabled" | "disabled") | undefined
 	mcpEnabled?: boolean | undefined
 	enableMcpServerCreation?: boolean | undefined
 	mode?: string | undefined
 	modeApiConfigs?:
-		| {
-				[x: string]: string
-		  }
-		| undefined
+	| {
+		[x: string]: string
+	}
+	| undefined
 	customModes?:
-		| {
-				slug: string
-				name: string
-				roleDefinition: string
-				whenToUse?: string | undefined
-				customInstructions?: string | undefined
-				groups: (
-					| ("read" | "edit" | "browser" | "command" | "mcp" | "modes")
-					| [
-							"read" | "edit" | "browser" | "command" | "mcp" | "modes",
-							{
-								fileRegex?: string | undefined
-								description?: string | undefined
-							},
-					  ]
-				)[]
-				source?: ("global" | "project") | undefined
-		  }[]
-		| undefined
+	| {
+		slug: string
+		name: string
+		roleDefinition: string
+		whenToUse?: string | undefined
+		customInstructions?: string | undefined
+		groups: (
+			| ("read" | "edit" | "browser" | "command" | "mcp" | "modes")
+			| [
+				"read" | "edit" | "browser" | "command" | "mcp" | "modes",
+				{
+					fileRegex?: string | undefined
+					description?: string | undefined
+				},
+			]
+		)[]
+		source?: ("global" | "project") | undefined
+	}[]
+	| undefined
 	customModePrompts?:
+	| {
+		[x: string]:
 		| {
-				[x: string]:
-					| {
-							roleDefinition?: string | undefined
-							whenToUse?: string | undefined
-							customInstructions?: string | undefined
-					  }
-					| undefined
-		  }
+			roleDefinition?: string | undefined
+			whenToUse?: string | undefined
+			customInstructions?: string | undefined
+		}
 		| undefined
+	}
+	| undefined
 	customSupportPrompts?:
-		| {
-				[x: string]: string | undefined
-		  }
-		| undefined
+	| {
+		[x: string]: string | undefined
+	}
+	| undefined
 	enhancementApiConfigId?: string | undefined
 	historyPreviewCollapsed?: boolean | undefined
 }
@@ -206,30 +206,30 @@ export type { ProviderName }
 
 type ProviderSettings = {
 	apiProvider?:
-		| (
-				| "anthropic"
-				| "glama"
-				| "openrouter"
-				| "bedrock"
-				| "vertex"
-				| "openai"
-				| "ollama"
-				| "vscode-lm"
-				| "lmstudio"
-				| "gemini"
-				| "openai-native"
-				| "mistral"
-				| "deepseek"
-				| "unbound"
-				| "requesty"
-				| "human-relay"
-				| "fake-ai"
-				| "xai"
-				| "groq"
-				| "chutes"
-				| "litellm"
-		  )
-		| undefined
+	| (
+		| "anthropic"
+		| "glama"
+		| "openrouter"
+		| "bedrock"
+		| "vertex"
+		| "openai"
+		| "ollama"
+		| "vscode-lm"
+		| "lmstudio"
+		| "gemini"
+		| "openai-native"
+		| "mistral"
+		| "deepseek"
+		| "unbound"
+		| "requesty"
+		| "human-relay"
+		| "fake-ai"
+		| "xai"
+		| "groq"
+		| "chutes"
+		| "litellm"
+	)
+	| undefined
 	includeMaxTokens?: boolean | undefined
 	reasoningEffort?: ("low" | "medium" | "high") | undefined
 	diffEnabled?: boolean | undefined
@@ -268,54 +268,54 @@ type ProviderSettings = {
 	openAiR1FormatEnabled?: boolean | undefined
 	openAiModelId?: string | undefined
 	openAiCustomModelInfo?:
-		| ({
-				maxTokens?: (number | null) | undefined
-				maxThinkingTokens?: (number | null) | undefined
-				contextWindow: number
-				supportsImages?: boolean | undefined
-				supportsComputerUse?: boolean | undefined
-				supportsPromptCache: boolean
-				inputPrice?: number | undefined
-				outputPrice?: number | undefined
-				cacheWritesPrice?: number | undefined
-				cacheReadsPrice?: number | undefined
-				description?: string | undefined
-				reasoningEffort?: ("low" | "medium" | "high") | undefined
-				thinking?: boolean | undefined
-				minTokensPerCachePoint?: number | undefined
-				maxCachePoints?: number | undefined
-				cachableFields?: string[] | undefined
-				tiers?:
-					| {
-							contextWindow: number
-							inputPrice?: number | undefined
-							outputPrice?: number | undefined
-							cacheWritesPrice?: number | undefined
-							cacheReadsPrice?: number | undefined
-					  }[]
-					| undefined
-		  } | null)
+	| ({
+		maxTokens?: (number | null) | undefined
+		maxThinkingTokens?: (number | null) | undefined
+		contextWindow: number
+		supportsImages?: boolean | undefined
+		supportsComputerUse?: boolean | undefined
+		supportsPromptCache: boolean
+		inputPrice?: number | undefined
+		outputPrice?: number | undefined
+		cacheWritesPrice?: number | undefined
+		cacheReadsPrice?: number | undefined
+		description?: string | undefined
+		reasoningEffort?: ("low" | "medium" | "high") | undefined
+		thinking?: boolean | undefined
+		minTokensPerCachePoint?: number | undefined
+		maxCachePoints?: number | undefined
+		cachableFields?: string[] | undefined
+		tiers?:
+		| {
+			contextWindow: number
+			inputPrice?: number | undefined
+			outputPrice?: number | undefined
+			cacheWritesPrice?: number | undefined
+			cacheReadsPrice?: number | undefined
+		}[]
 		| undefined
+	} | null)
+	| undefined
 	openAiUseAzure?: boolean | undefined
 	azureApiVersion?: string | undefined
 	openAiStreamingEnabled?: boolean | undefined
 	enableReasoningEffort?: boolean | undefined
 	openAiHostHeader?: string | undefined
 	openAiHeaders?:
-		| {
-				[x: string]: string
-		  }
-		| undefined
+	| {
+		[x: string]: string
+	}
+	| undefined
 	ollamaModelId?: string | undefined
 	ollamaBaseUrl?: string | undefined
 	vsCodeLmModelSelector?:
-		| {
-				vendor?: string | undefined
-				family?: string | undefined
-				version?: string | undefined
-				id?: string | undefined
-		  }
-		| undefined
+	| {
+		vendor?: string | undefined
+		family?: string | undefined
+		version?: string | undefined
+		id?: string | undefined
+	}
+	| undefined
 	lmStudioModelId?: string | undefined
 	lmStudioBaseUrl?: string | undefined
 	lmStudioDraftModelId?: string | undefined
@@ -347,30 +347,30 @@ type ProviderSettingsEntry = {
 	id: string
 	name: string
 	apiProvider?:
-		| (
-				| "anthropic"
-				| "glama"
-				| "openrouter"
-				| "bedrock"
-				| "vertex"
-				| "openai"
-				| "ollama"
-				| "vscode-lm"
-				| "lmstudio"
-				| "gemini"
-				| "openai-native"
-				| "mistral"
-				| "deepseek"
-				| "unbound"
-				| "requesty"
-				| "human-relay"
-				| "fake-ai"
-				| "xai"
-				| "groq"
-				| "chutes"
-				| "litellm"
-		  )
-		| undefined
+	| (
+		| "anthropic"
+		| "glama"
+		| "openrouter"
+		| "bedrock"
+		| "vertex"
+		| "openai"
+		| "ollama"
+		| "vscode-lm"
+		| "lmstudio"
+		| "gemini"
+		| "openai-native"
+		| "mistral"
+		| "deepseek"
+		| "unbound"
+		| "requesty"
+		| "human-relay"
+		| "fake-ai"
+		| "xai"
+		| "groq"
+		| "chutes"
+		| "litellm"
+	)
+	| undefined
 }
 
 export type { ProviderSettingsEntry }
@@ -379,71 +379,71 @@ type ClineMessage = {
 	ts: number
 	type: "ask" | "say"
 	ask?:
-		| (
-				| "followup"
-				| "command"
-				| "command_output"
-				| "completion_result"
-				| "tool"
-				| "api_req_failed"
-				| "resume_task"
-				| "resume_completed_task"
-				| "mistake_limit_reached"
-				| "browser_action_launch"
-				| "use_mcp_server"
-				| "auto_approval_max_req_reached"
-		  )
-		| undefined
+	| (
+		| "followup"
+		| "command"
+		| "command_output"
+		| "completion_result"
+		| "tool"
+		| "api_req_failed"
+		| "resume_task"
+		| "resume_completed_task"
+		| "mistake_limit_reached"
+		| "browser_action_launch"
+		| "use_mcp_server"
+		| "auto_approval_max_req_reached"
+	)
+	| undefined
 	say?:
-		| (
-				| "error"
-				| "api_req_started"
-				| "api_req_finished"
-				| "api_req_retried"
-				| "api_req_retry_delayed"
-				| "api_req_deleted"
-				| "text"
-				| "reasoning"
-				| "completion_result"
-				| "user_feedback"
-				| "user_feedback_diff"
-				| "command_output"
-				| "shell_integration_warning"
-				| "browser_action"
-				| "browser_action_result"
-				| "mcp_server_request_started"
-				| "mcp_server_response"
-				| "subtask_result"
-				| "checkpoint_saved"
-				| "rooignore_error"
-				| "diff_error"
-				| "condense_context"
-		  )
-		| undefined
+	| (
+		| "error"
+		| "api_req_started"
+		| "api_req_finished"
+		| "api_req_retried"
+		| "api_req_retry_delayed"
+		| "api_req_deleted"
+		| "text"
+		| "reasoning"
+		| "completion_result"
+		| "user_feedback"
+		| "user_feedback_diff"
+		| "command_output"
+		| "shell_integration_warning"
+		| "browser_action"
+		| "browser_action_result"
+		| "mcp_server_request_started"
+		| "mcp_server_response"
+		| "subtask_result"
+		| "checkpoint_saved"
+		| "rooignore_error"
+		| "diff_error"
+		| "condense_context"
+	)
+	| undefined
 	text?: string | undefined
 	images?: string[] | undefined
 	partial?: boolean | undefined
 	reasoning?: string | undefined
 	conversationHistoryIndex?: number | undefined
 	checkpoint?:
-		| {
-				[x: string]: unknown
-		  }
-		| undefined
+	| {
+		[x: string]: unknown
+	}
+	| undefined
 	progressStatus?:
-		| {
-				icon?: string | undefined
-				text?: string | undefined
-		  }
-		| undefined
+	| {
+		icon?: string | undefined
+		text?: string | undefined
+	}
+	| undefined
 	contextCondense?:
-		| {
-				cost: number
-				prevContextTokens: number
-				newContextTokens: number
-				summary: string
-		  }
-		| undefined
+	| {
+		cost: number
+		prevContextTokens: number
+		newContextTokens: number
+		summary: string
+	}
+	| undefined
 }
 
 export type { ClineMessage }
@@ -468,71 +468,71 @@ type RooCodeEvents = {
 				ts: number
 				type: "ask" | "say"
 				ask?:
-					| (
-							| "followup"
-							| "command"
-							| "command_output"
-							| "completion_result"
-							| "tool"
-							| "api_req_failed"
-							| "resume_task"
-							| "resume_completed_task"
-							| "mistake_limit_reached"
-							| "browser_action_launch"
-							| "use_mcp_server"
-							| "auto_approval_max_req_reached"
-					  )
-					| undefined
+				| (
+					| "followup"
+					| "command"
+					| "command_output"
+					| "completion_result"
+					| "tool"
+					| "api_req_failed"
+					| "resume_task"
+					| "resume_completed_task"
+					| "mistake_limit_reached"
+					| "browser_action_launch"
+					| "use_mcp_server"
+					| "auto_approval_max_req_reached"
+				)
+				| undefined
 				say?:
-					| (
-							| "error"
-							| "api_req_started"
-							| "api_req_finished"
-							| "api_req_retried"
-							| "api_req_retry_delayed"
-							| "api_req_deleted"
-							| "text"
-							| "reasoning"
-							| "completion_result"
-							| "user_feedback"
-							| "user_feedback_diff"
-							| "command_output"
-							| "shell_integration_warning"
-							| "browser_action"
-							| "browser_action_result"
-							| "mcp_server_request_started"
-							| "mcp_server_response"
-							| "subtask_result"
-							| "checkpoint_saved"
-							| "rooignore_error"
-							| "diff_error"
-							| "condense_context"
-					  )
-					| undefined
+				| (
+					| "error"
+					| "api_req_started"
+					| "api_req_finished"
+					| "api_req_retried"
+					| "api_req_retry_delayed"
+					| "api_req_deleted"
+					| "text"
+					| "reasoning"
+					| "completion_result"
+					| "user_feedback"
+					| "user_feedback_diff"
+					| "command_output"
+					| "shell_integration_warning"
+					| "browser_action"
+					| "browser_action_result"
+					| "mcp_server_request_started"
+					| "mcp_server_response"
+					| "subtask_result"
+					| "checkpoint_saved"
+					| "rooignore_error"
+					| "diff_error"
+					| "condense_context"
+				)
+				| undefined
 				text?: string | undefined
 				images?: string[] | undefined
 				partial?: boolean | undefined
 				reasoning?: string | undefined
 				conversationHistoryIndex?: number | undefined
 				checkpoint?:
-					| {
-							[x: string]: unknown
-					  }
-					| undefined
+				| {
+					[x: string]: unknown
+				}
+				| undefined
 				progressStatus?:
-					| {
-							icon?: string | undefined
-							text?: string | undefined
-					  }
-					| undefined
+				| {
+					icon?: string | undefined
+					text?: string | undefined
+				}
+				| undefined
 				contextCondense?:
-					| {
-							cost: number
-							prevContextTokens: number
-							newContextTokens: number
-							summary: string
-					  }
-					| undefined
+				| {
+					cost: number
+					prevContextTokens: number
+					newContextTokens: number
+					summary: string
+				}
+				| undefined
 			}
 		},
 	]
@@ -601,526 +601,48 @@ export type { RooCodeEvents }
 
 type IpcMessage =
 	| {
-			type: "Ack"
-			origin: "server"
-			data: {
-				clientId: string
-				pid: number
-				ppid: number
-			}
-	  }
-	| {
-			type: "TaskCommand"
-			origin: "client"
+		type: "Ack"
+		origin: "server"
+		data: {
 			clientId: string
-			data:
-				| {
-						commandName: "StartNewTask"
-						data: {
-							configuration: {
-								apiProvider?:
-									| (
-											| "anthropic"
-											| "glama"
-											| "openrouter"
-											| "bedrock"
-											| "vertex"
-											| "openai"
-											| "ollama"
-											| "vscode-lm"
-											| "lmstudio"
-											| "gemini"
-											| "openai-native"
-											| "mistral"
-											| "deepseek"
-											| "unbound"
-											| "requesty"
-											| "human-relay"
-											| "fake-ai"
-											| "xai"
-											| "groq"
-											| "chutes"
-											| "litellm"
-									  )
-									| undefined
-								includeMaxTokens?: boolean | undefined
-								reasoningEffort?: ("low" | "medium" | "high") | undefined
-								diffEnabled?: boolean | undefined
-								fuzzyMatchThreshold?: number | undefined
-								modelTemperature?: (number | null) | undefined
-								rateLimitSeconds?: number | undefined
-								modelMaxTokens?: number | undefined
-								modelMaxThinkingTokens?: number | undefined
-								apiModelId?: string | undefined
-								apiKey?: string | undefined
-								anthropicBaseUrl?: string | undefined
-								anthropicUseAuthToken?: boolean | undefined
-								glamaModelId?: string | undefined
-								glamaApiKey?: string | undefined
-								openRouterApiKey?: string | undefined
-								openRouterModelId?: string | undefined
-								openRouterBaseUrl?: string | undefined
-								openRouterSpecificProvider?: string | undefined
-								openRouterUseMiddleOutTransform?: boolean | undefined
-								awsAccessKey?: string | undefined
-								awsSecretKey?: string | undefined
-								awsSessionToken?: string | undefined
-								awsRegion?: string | undefined
-								awsUseCrossRegionInference?: boolean | undefined
-								awsUsePromptCache?: boolean | undefined
-								awsProfile?: string | undefined
-								awsUseProfile?: boolean | undefined
-								awsCustomArn?: string | undefined
-								vertexKeyFile?: string | undefined
-								vertexJsonCredentials?: string | undefined
-								vertexProjectId?: string | undefined
-								vertexRegion?: string | undefined
-								openAiBaseUrl?: string | undefined
-								openAiApiKey?: string | undefined
-								openAiLegacyFormat?: boolean | undefined
-								openAiR1FormatEnabled?: boolean | undefined
-								openAiModelId?: string | undefined
-								openAiCustomModelInfo?:
-									| ({
-											maxTokens?: (number | null) | undefined
-											maxThinkingTokens?: (number | null) | undefined
-											contextWindow: number
-											supportsImages?: boolean | undefined
-											supportsComputerUse?: boolean | undefined
-											supportsPromptCache: boolean
-											inputPrice?: number | undefined
-											outputPrice?: number | undefined
-											cacheWritesPrice?: number | undefined
-											cacheReadsPrice?: number | undefined
-											description?: string | undefined
-											reasoningEffort?: ("low" | "medium" | "high") | undefined
-											thinking?: boolean | undefined
-											minTokensPerCachePoint?: number | undefined
-											maxCachePoints?: number | undefined
-											cachableFields?: string[] | undefined
-											tiers?:
-												| {
-														contextWindow: number
-														inputPrice?: number | undefined
-														outputPrice?: number | undefined
-														cacheWritesPrice?: number | undefined
-														cacheReadsPrice?: number | undefined
-												  }[]
-												| undefined
-									  } | null)
-									| undefined
-								openAiUseAzure?: boolean | undefined
-								azureApiVersion?: string | undefined
-								openAiStreamingEnabled?: boolean | undefined
-								enableReasoningEffort?: boolean | undefined
-								openAiHostHeader?: string | undefined
-								openAiHeaders?:
-									| {
-											[x: string]: string
-									  }
-									| undefined
-								ollamaModelId?: string | undefined
-								ollamaBaseUrl?: string | undefined
-								vsCodeLmModelSelector?:
-									| {
-											vendor?: string | undefined
-											family?: string | undefined
-											version?: string | undefined
-											id?: string | undefined
-									  }
-									| undefined
-								lmStudioModelId?: string | undefined
-								lmStudioBaseUrl?: string | undefined
-								lmStudioDraftModelId?: string | undefined
-								lmStudioSpeculativeDecodingEnabled?: boolean | undefined
-								geminiApiKey?: string | undefined
-								googleGeminiBaseUrl?: string | undefined
-								openAiNativeApiKey?: string | undefined
-								openAiNativeBaseUrl?: string | undefined
-								mistralApiKey?: string | undefined
-								mistralCodestralUrl?: string | undefined
-								deepSeekBaseUrl?: string | undefined
-								deepSeekApiKey?: string | undefined
-								unboundApiKey?: string | undefined
-								unboundModelId?: string | undefined
-								requestyApiKey?: string | undefined
-								requestyModelId?: string | undefined
-								fakeAi?: unknown | undefined
-								xaiApiKey?: string | undefined
-								groqApiKey?: string | undefined
-								chutesApiKey?: string | undefined
-								litellmBaseUrl?: string | undefined
-								litellmApiKey?: string | undefined
-								litellmModelId?: string | undefined
-								currentApiConfigName?: string | undefined
-								listApiConfigMeta?:
-									| {
-											id: string
-											name: string
-											apiProvider?:
-												| (
-														| "anthropic"
-														| "glama"
-														| "openrouter"
-														| "bedrock"
-														| "vertex"
-														| "openai"
-														| "ollama"
-														| "vscode-lm"
-														| "lmstudio"
-														| "gemini"
-														| "openai-native"
-														| "mistral"
-														| "deepseek"
-														| "unbound"
-														| "requesty"
-														| "human-relay"
-														| "fake-ai"
-														| "xai"
-														| "groq"
-														| "chutes"
-														| "litellm"
-												  )
-												| undefined
-									  }[]
-									| undefined
-								pinnedApiConfigs?:
-									| {
-											[x: string]: boolean
-									  }
-									| undefined
-								lastShownAnnouncementId?: string | undefined
-								customInstructions?: string | undefined
-								taskHistory?:
-									| {
-											id: string
-											number: number
-											ts: number
-											task: string
-											tokensIn: number
-											tokensOut: number
-											cacheWrites?: number | undefined
-											cacheReads?: number | undefined
-											totalCost: number
-											size?: number | undefined
-											workspace?: string | undefined
-									  }[]
-									| undefined
-								autoApprovalEnabled?: boolean | undefined
-								alwaysAllowReadOnly?: boolean | undefined
-								alwaysAllowReadOnlyOutsideWorkspace?: boolean | undefined
-								alwaysAllowWrite?: boolean | undefined
-								alwaysAllowWriteOutsideWorkspace?: boolean | undefined
-								writeDelayMs?: number | undefined
-								alwaysAllowBrowser?: boolean | undefined
-								alwaysApproveResubmit?: boolean | undefined
-								requestDelaySeconds?: number | undefined
-								alwaysAllowMcp?: boolean | undefined
-								alwaysAllowModeSwitch?: boolean | undefined
-								alwaysAllowSubtasks?: boolean | undefined
-								alwaysAllowExecute?: boolean | undefined
-								allowedCommands?: string[] | undefined
-								allowedMaxRequests?: number | undefined
-								autoCondenseContextPercent?: number | undefined
-								browserToolEnabled?: boolean | undefined
-								browserViewportSize?: string | undefined
-								screenshotQuality?: number | undefined
-								remoteBrowserEnabled?: boolean | undefined
-								remoteBrowserHost?: string | undefined
-								cachedChromeHostUrl?: string | undefined
-								enableCheckpoints?: boolean | undefined
-								ttsEnabled?: boolean | undefined
-								ttsSpeed?: number | undefined
-								soundEnabled?: boolean | undefined
-								soundVolume?: number | undefined
-								maxOpenTabsContext?: number | undefined
-								maxWorkspaceFiles?: number | undefined
-								showRooIgnoredFiles?: boolean | undefined
-								maxReadFileLine?: number | undefined
-								terminalOutputLineLimit?: number | undefined
-								terminalShellIntegrationTimeout?: number | undefined
-								terminalShellIntegrationDisabled?: boolean | undefined
-								terminalCommandDelay?: number | undefined
-								terminalPowershellCounter?: boolean | undefined
-								terminalZshClearEolMark?: boolean | undefined
-								terminalZshOhMy?: boolean | undefined
-								terminalZshP10k?: boolean | undefined
-								terminalZdotdir?: boolean | undefined
-								terminalCompressProgressBar?: boolean | undefined
-								experiments?:
-									| {
-											autoCondenseContext: boolean
-											powerSteering: boolean
-											enableMultiToolCalls: boolean
-									  }
-									| undefined
-								language?:
-									| (
-											| "ca"
-											| "de"
-											| "en"
-											| "es"
-											| "fr"
-											| "hi"
-											| "it"
-											| "ja"
-											| "ko"
-											| "nl"
-											| "pl"
-											| "pt-BR"
-											| "ru"
-											| "tr"
-											| "vi"
-											| "zh-CN"
-											| "zh-TW"
-									  )
-									| undefined
-								telemetrySetting?: ("unset" | "enabled" | "disabled") | undefined
-								mcpEnabled?: boolean | undefined
-								enableMcpServerCreation?: boolean | undefined
-								mode?: string | undefined
-								modeApiConfigs?:
-									| {
-											[x: string]: string
-									  }
-									| undefined
-								customModes?:
-									| {
-											slug: string
-											name: string
-											roleDefinition: string
-											whenToUse?: string | undefined
-											customInstructions?: string | undefined
-											groups: (
-												| ("read" | "edit" | "browser" | "command" | "mcp" | "modes")
-												| [
-														"read" | "edit" | "browser" | "command" | "mcp" | "modes",
-														{
-															fileRegex?: string | undefined
-															description?: string | undefined
-														},
-												  ]
-											)[]
-											source?: ("global" | "project") | undefined
-									  }[]
-									| undefined
-								customModePrompts?:
-									| {
-											[x: string]:
-												| {
-														roleDefinition?: string | undefined
-														whenToUse?: string | undefined
-														customInstructions?: string | undefined
-												  }
-												| undefined
-									  }
-									| undefined
-								customSupportPrompts?:
-									| {
-											[x: string]: string | undefined
-									  }
-									| undefined
-								enhancementApiConfigId?: string | undefined
-								historyPreviewCollapsed?: boolean | undefined
-							}
-							text: string
-							images?: string[] | undefined
-							newTab?: boolean | undefined
-						}
-				  }
-				| {
-						commandName: "CancelTask"
-						data: string
-				  }
-				| {
-						commandName: "CloseTask"
-						data: string
-				  }
-	  }
+			pid: number
+			ppid: number
+		}
+	}
 	| {
-			type: "TaskEvent"
-			origin: "server"
-			relayClientId?: string | undefined
-			data:
-				| {
-						eventName: "message"
-						payload: [
-							{
-								taskId: string
-								action: "created" | "updated"
-								message: {
-									ts: number
-									type: "ask" | "say"
-									ask?:
-										| (
-												| "followup"
-												| "command"
-												| "command_output"
-												| "completion_result"
-												| "tool"
-												| "api_req_failed"
-												| "resume_task"
-												| "resume_completed_task"
-												| "mistake_limit_reached"
-												| "browser_action_launch"
-												| "use_mcp_server"
-												| "auto_approval_max_req_reached"
-										  )
-										| undefined
-									say?:
-										| (
-												| "error"
-												| "api_req_started"
-												| "api_req_finished"
-												| "api_req_retried"
-												| "api_req_retry_delayed"
-												| "api_req_deleted"
-												| "text"
-												| "reasoning"
-												| "completion_result"
-												| "user_feedback"
-												| "user_feedback_diff"
-												| "command_output"
-												| "shell_integration_warning"
-												| "browser_action"
-												| "browser_action_result"
-												| "mcp_server_request_started"
-												| "mcp_server_response"
-												| "subtask_result"
-												| "checkpoint_saved"
-												| "rooignore_error"
-												| "diff_error"
-												| "condense_context"
-										  )
-										| undefined
-									text?: string | undefined
-									images?: string[] | undefined
-									partial?: boolean | undefined
-									reasoning?: string | undefined
-									conversationHistoryIndex?: number | undefined
-									checkpoint?:
-										| {
-												[x: string]: unknown
-										  }
-										| undefined
-									progressStatus?:
-										| {
-												icon?: string | undefined
-												text?: string | undefined
-										  }
-										| undefined
-									contextCondense?:
-										| {
-												cost: number
-												prevContextTokens: number
-												newContextTokens: number
-												summary: string
-										  }
-										| undefined
-								}
-							},
-						]
-				  }
-				| {
-						eventName: "taskCreated"
-						payload: [string]
-				  }
-				| {
-						eventName: "taskStarted"
-						payload: [string]
-				  }
-				| {
-						eventName: "taskModeSwitched"
-						payload: [string, string]
-				  }
-				| {
-						eventName: "taskPaused"
-						payload: [string]
-				  }
-				| {
-						eventName: "taskUnpaused"
-						payload: [string]
-				  }
-				| {
-						eventName: "taskAskResponded"
-						payload: [string]
-				  }
-				| {
-						eventName: "taskAborted"
-						payload: [string]
-				  }
-				| {
-						eventName: "taskSpawned"
-						payload: [string, string]
-				  }
-				| {
-						eventName: "taskCompleted"
-						payload: [
-							string,
-							{
-								totalTokensIn: number
-								totalTokensOut: number
-								totalCacheWrites?: number | undefined
-								totalCacheReads?: number | undefined
-								totalCost: number
-								contextTokens: number
-							},
-							{
-								[x: string]: {
-									attempts: number
-									failures: number
-								}
-							},
-						]
-				  }
-				| {
-						eventName: "taskTokenUsageUpdated"
-						payload: [
-							string,
-							{
-								totalTokensIn: number
-								totalTokensOut: number
-								totalCacheWrites?: number | undefined
-								totalCacheReads?: number | undefined
-								totalCost: number
-								contextTokens: number
-							},
-						]
-				  }
-	  }
-
-export type { IpcMessage }
-
-type TaskCommand =
-	| {
+		type: "TaskCommand"
+		origin: "client"
+		clientId: string
+		data:
+		| {
 			commandName: "StartNewTask"
 			data: {
 				configuration: {
 					apiProvider?:
-						| (
-								| "anthropic"
-								| "glama"
-								| "openrouter"
-								| "bedrock"
-								| "vertex"
-								| "openai"
-								| "ollama"
-								| "vscode-lm"
-								| "lmstudio"
-								| "gemini"
-								| "openai-native"
-								| "mistral"
-								| "deepseek"
-								| "unbound"
-								| "requesty"
-								| "human-relay"
-								| "fake-ai"
-								| "xai"
-								| "groq"
-								| "chutes"
-								| "litellm"
-						  )
-						| undefined
+					| (
+						| "anthropic"
+						| "glama"
+						| "openrouter"
+						| "bedrock"
+						| "vertex"
+						| "openai"
+						| "ollama"
+						| "vscode-lm"
+						| "lmstudio"
+						| "gemini"
+						| "openai-native"
+						| "mistral"
+						| "deepseek"
+						| "unbound"
+						| "requesty"
+						| "human-relay"
+						| "fake-ai"
+						| "xai"
+						| "groq"
+						| "chutes"
+						| "litellm"
+					)
+					| undefined
 					includeMaxTokens?: boolean | undefined
 					reasoningEffort?: ("low" | "medium" | "high") | undefined
 					diffEnabled?: boolean | undefined
@@ -1159,54 +681,54 @@ type TaskCommand =
 					openAiR1FormatEnabled?: boolean | undefined
 					openAiModelId?: string | undefined
 					openAiCustomModelInfo?:
-						| ({
-								maxTokens?: (number | null) | undefined
-								maxThinkingTokens?: (number | null) | undefined
-								contextWindow: number
-								supportsImages?: boolean | undefined
-								supportsComputerUse?: boolean | undefined
-								supportsPromptCache: boolean
-								inputPrice?: number | undefined
-								outputPrice?: number | undefined
-								cacheWritesPrice?: number | undefined
-								cacheReadsPrice?: number | undefined
-								description?: string | undefined
-								reasoningEffort?: ("low" | "medium" | "high") | undefined
-								thinking?: boolean | undefined
-								minTokensPerCachePoint?: number | undefined
-								maxCachePoints?: number | undefined
-								cachableFields?: string[] | undefined
-								tiers?:
-									| {
-											contextWindow: number
-											inputPrice?: number | undefined
-											outputPrice?: number | undefined
-											cacheWritesPrice?: number | undefined
-											cacheReadsPrice?: number | undefined
-									  }[]
-									| undefined
-						  } | null)
+					| ({
+						maxTokens?: (number | null) | undefined
+						maxThinkingTokens?: (number | null) | undefined
+						contextWindow: number
+						supportsImages?: boolean | undefined
+						supportsComputerUse?: boolean | undefined
+						supportsPromptCache: boolean
+						inputPrice?: number | undefined
+						outputPrice?: number | undefined
+						cacheWritesPrice?: number | undefined
+						cacheReadsPrice?: number | undefined
+						description?: string | undefined
+						reasoningEffort?: ("low" | "medium" | "high") | undefined
+						thinking?: boolean | undefined
+						minTokensPerCachePoint?: number | undefined
+						maxCachePoints?: number | undefined
+						cachableFields?: string[] | undefined
+						tiers?:
+						| {
+							contextWindow: number
+							inputPrice?: number | undefined
+							outputPrice?: number | undefined
+							cacheWritesPrice?: number | undefined
+							cacheReadsPrice?: number | undefined
+						}[]
 						| undefined
+					} | null)
+					| undefined
 					openAiUseAzure?: boolean | undefined
 					azureApiVersion?: string | undefined
 					openAiStreamingEnabled?: boolean | undefined
 					enableReasoningEffort?: boolean | undefined
 					openAiHostHeader?: string | undefined
 					openAiHeaders?:
-						| {
-								[x: string]: string
-						  }
-						| undefined
+					| {
+						[x: string]: string
+					}
+					| undefined
 					ollamaModelId?: string | undefined
 					ollamaBaseUrl?: string | undefined
 					vsCodeLmModelSelector?:
-						| {
-								vendor?: string | undefined
-								family?: string | undefined
-								version?: string | undefined
-								id?: string | undefined
-						  }
-						| undefined
+					| {
+						vendor?: string | undefined
+						family?: string | undefined
+						version?: string | undefined
+						id?: string | undefined
+					}
+					| undefined
 					lmStudioModelId?: string | undefined
 					lmStudioBaseUrl?: string | undefined
 					lmStudioDraftModelId?: string | undefined
@@ -1232,58 +754,58 @@ type TaskCommand =
 					litellmModelId?: string | undefined
 					currentApiConfigName?: string | undefined
 					listApiConfigMeta?:
-						| {
-								id: string
-								name: string
-								apiProvider?:
-									| (
-											| "anthropic"
-											| "glama"
-											| "openrouter"
-											| "bedrock"
-											| "vertex"
-											| "openai"
-											| "ollama"
-											| "vscode-lm"
-											| "lmstudio"
-											| "gemini"
-											| "openai-native"
-											| "mistral"
-											| "deepseek"
-											| "unbound"
-											| "requesty"
-											| "human-relay"
-											| "fake-ai"
-											| "xai"
-											| "groq"
-											| "chutes"
-											| "litellm"
-									  )
-									| undefined
-						  }[]
+					| {
+						id: string
+						name: string
+						apiProvider?:
+						| (
+							| "anthropic"
+							| "glama"
+							| "openrouter"
+							| "bedrock"
+							| "vertex"
+							| "openai"
+							| "ollama"
+							| "vscode-lm"
+							| "lmstudio"
+							| "gemini"
+							| "openai-native"
+							| "mistral"
+							| "deepseek"
+							| "unbound"
+							| "requesty"
+							| "human-relay"
+							| "fake-ai"
+							| "xai"
+							| "groq"
+							| "chutes"
+							| "litellm"
+						)
 						| undefined
+					}[]
+					| undefined
 					pinnedApiConfigs?:
-						| {
-								[x: string]: boolean
-						  }
-						| undefined
+					| {
+						[x: string]: boolean
+					}
+					| undefined
 					lastShownAnnouncementId?: string | undefined
 					customInstructions?: string | undefined
 					taskHistory?:
-						| {
-								id: string
-								number: number
-								ts: number
-								task: string
-								tokensIn: number
-								tokensOut: number
-								cacheWrites?: number | undefined
-								cacheReads?: number | undefined
-								totalCost: number
-								size?: number | undefined
-								workspace?: string | undefined
-						  }[]
-						| undefined
+					| {
+						id: string
+						number: number
+						ts: number
+						task: string
+						tokensIn: number
+						tokensOut: number
+						cacheWrites?: number | undefined
+						cacheReads?: number | undefined
+						totalCost: number
+						size?: number | undefined
+						workspace?: string | undefined
+					}[]
+					| undefined
 					autoApprovalEnabled?: boolean | undefined
 					alwaysAllowReadOnly?: boolean | undefined
 					alwaysAllowReadOnlyOutsideWorkspace?: boolean | undefined
@@ -1326,78 +848,78 @@ type TaskCommand =
 					terminalZdotdir?: boolean | undefined
 					terminalCompressProgressBar?: boolean | undefined
 					experiments?:
-						| {
-								autoCondenseContext: boolean
-								powerSteering: boolean
-								enableMultiToolCalls: boolean
-						  }
-						| undefined
+					| {
+						autoCondenseContext: boolean
+						powerSteering: boolean
+						enableMultiToolCalls: boolean
+					}
+					| undefined
 					language?:
-						| (
-								| "ca"
-								| "de"
-								| "en"
-								| "es"
-								| "fr"
-								| "hi"
-								| "it"
-								| "ja"
-								| "ko"
-								| "nl"
-								| "pl"
-								| "pt-BR"
-								| "ru"
-								| "tr"
-								| "vi"
-								| "zh-CN"
-								| "zh-TW"
-						  )
-						| undefined
+					| (
+						| "ca"
+						| "de"
+						| "en"
+						| "es"
+						| "fr"
+						| "hi"
+						| "it"
+						| "ja"
+						| "ko"
+						| "nl"
+						| "pl"
+						| "pt-BR"
+						| "ru"
+						| "tr"
+						| "vi"
+						| "zh-CN"
+						| "zh-TW"
+					)
+					| undefined
 					telemetrySetting?: ("unset" | "enabled" | "disabled") | undefined
 					mcpEnabled?: boolean | undefined
 					enableMcpServerCreation?: boolean | undefined
 					mode?: string | undefined
 					modeApiConfigs?:
-						| {
-								[x: string]: string
-						  }
-						| undefined
+					| {
+						[x: string]: string
+					}
+					| undefined
 					customModes?:
-						| {
-								slug: string
-								name: string
-								roleDefinition: string
-								whenToUse?: string | undefined
-								customInstructions?: string | undefined
-								groups: (
-									| ("read" | "edit" | "browser" | "command" | "mcp" | "modes")
-									| [
-											"read" | "edit" | "browser" | "command" | "mcp" | "modes",
-											{
-												fileRegex?: string | undefined
-												description?: string | undefined
-											},
-									  ]
-								)[]
-								source?: ("global" | "project") | undefined
-						  }[]
-						| undefined
+					| {
+						slug: string
+						name: string
+						roleDefinition: string
+						whenToUse?: string | undefined
+						customInstructions?: string | undefined
+						groups: (
+							| ("read" | "edit" | "browser" | "command" | "mcp" | "modes")
+							| [
+								"read" | "edit" | "browser" | "command" | "mcp" | "modes",
+								{
+									fileRegex?: string | undefined
+									description?: string | undefined
+								},
+							]
+						)[]
+						source?: ("global" | "project") | undefined
+					}[]
+					| undefined
 					customModePrompts?:
+					| {
+						[x: string]:
 						| {
-								[x: string]:
-									| {
-											roleDefinition?: string | undefined
-											whenToUse?: string | undefined
-											customInstructions?: string | undefined
-									  }
-									| undefined
-						  }
+							roleDefinition?: string | undefined
+							whenToUse?: string | undefined
+							customInstructions?: string | undefined
+						}
 						| undefined
+					}
+					| undefined
 					customSupportPrompts?:
-						| {
-								[x: string]: string | undefined
-						  }
-						| undefined
+					| {
+						[x: string]: string | undefined
+					}
+					| undefined
 					enhancementApiConfigId?: string | undefined
 					historyPreviewCollapsed?: boolean | undefined
 				}
@@ -1405,20 +927,22 @@ type TaskCommand =
 				images?: string[] | undefined
 				newTab?: boolean | undefined
 			}
-	  }
-	| {
+		}
+		| {
 			commandName: "CancelTask"
 			data: string
-	  }
-	| {
+		}
+		| {
 			commandName: "CloseTask"
 			data: string
-	  }
-
-export type { TaskCommand }
-
-type TaskEvent =
+		}
+	}
 	| {
+		type: "TaskEvent"
+		origin: "server"
+		relayClientId?: string | undefined
+		data:
+		| {
 			eventName: "message"
 			payload: [
 				{
@@ -1428,108 +952,108 @@ type TaskEvent =
 						ts: number
 						type: "ask" | "say"
 						ask?:
-							| (
-									| "followup"
-									| "command"
-									| "command_output"
-									| "completion_result"
-									| "tool"
-									| "api_req_failed"
-									| "resume_task"
-									| "resume_completed_task"
-									| "mistake_limit_reached"
-									| "browser_action_launch"
-									| "use_mcp_server"
-									| "auto_approval_max_req_reached"
-							  )
-							| undefined
+						| (
+							| "followup"
+							| "command"
+							| "command_output"
+							| "completion_result"
+							| "tool"
+							| "api_req_failed"
+							| "resume_task"
+							| "resume_completed_task"
+							| "mistake_limit_reached"
+							| "browser_action_launch"
+							| "use_mcp_server"
+							| "auto_approval_max_req_reached"
+						)
+						| undefined
 						say?:
-							| (
-									| "error"
-									| "api_req_started"
-									| "api_req_finished"
-									| "api_req_retried"
-									| "api_req_retry_delayed"
-									| "api_req_deleted"
-									| "text"
-									| "reasoning"
-									| "completion_result"
-									| "user_feedback"
-									| "user_feedback_diff"
-									| "command_output"
-									| "shell_integration_warning"
-									| "browser_action"
-									| "browser_action_result"
-									| "mcp_server_request_started"
-									| "mcp_server_response"
-									| "subtask_result"
-									| "checkpoint_saved"
-									| "rooignore_error"
-									| "diff_error"
-									| "condense_context"
-							  )
-							| undefined
+						| (
+							| "error"
+							| "api_req_started"
+							| "api_req_finished"
+							| "api_req_retried"
+							| "api_req_retry_delayed"
+							| "api_req_deleted"
+							| "text"
+							| "reasoning"
+							| "completion_result"
+							| "user_feedback"
+							| "user_feedback_diff"
+							| "command_output"
+							| "shell_integration_warning"
+							| "browser_action"
+							| "browser_action_result"
+							| "mcp_server_request_started"
+							| "mcp_server_response"
+							| "subtask_result"
+							| "checkpoint_saved"
+							| "rooignore_error"
+							| "diff_error"
+							| "condense_context"
+						)
+						| undefined
 						text?: string | undefined
 						images?: string[] | undefined
 						partial?: boolean | undefined
 						reasoning?: string | undefined
 						conversationHistoryIndex?: number | undefined
 						checkpoint?:
-							| {
-									[x: string]: unknown
-							  }
-							| undefined
+						| {
+							[x: string]: unknown
+						}
+						| undefined
 						progressStatus?:
-							| {
-									icon?: string | undefined
-									text?: string | undefined
-							  }
-							| undefined
+						| {
+							icon?: string | undefined
+							text?: string | undefined
+						}
+						| undefined
 						contextCondense?:
-							| {
-									cost: number
-									prevContextTokens: number
-									newContextTokens: number
-									summary: string
-							  }
-							| undefined
+						| {
+							cost: number
+							prevContextTokens: number
+							newContextTokens: number
+							summary: string
+						}
+						| undefined
 					}
 				},
 			]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskCreated"
 			payload: [string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskStarted"
 			payload: [string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskModeSwitched"
 			payload: [string, string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskPaused"
 			payload: [string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskUnpaused"
 			payload: [string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskAskResponded"
 			payload: [string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskAborted"
 			payload: [string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskSpawned"
 			payload: [string, string]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskCompleted"
 			payload: [
 				string,
@@ -1548,8 +1072,8 @@ type TaskEvent =
 					}
 				},
 			]
-	  }
-	| {
+		}
+		| {
 			eventName: "taskTokenUsageUpdated"
 			payload: [
 				string,
@@ -1562,6 +1086,482 @@ type TaskEvent =
 					contextTokens: number
 				},
 			]
-	  }
+		}
+	}
+
+export type { IpcMessage }
+
+type TaskCommand =
+	| {
+		commandName: "StartNewTask"
+		data: {
+			configuration: {
+				apiProvider?:
+				| (
+					| "anthropic"
+					| "glama"
+					| "openrouter"
+					| "bedrock"
+					| "vertex"
+					| "openai"
+					| "ollama"
+					| "vscode-lm"
+					| "lmstudio"
+					| "gemini"
+					| "openai-native"
+					| "mistral"
+					| "deepseek"
+					| "unbound"
+					| "requesty"
+					| "human-relay"
+					| "fake-ai"
+					| "xai"
+					| "groq"
+					| "chutes"
+					| "litellm"
+				)
+				| undefined
+				includeMaxTokens?: boolean | undefined
+				reasoningEffort?: ("low" | "medium" | "high") | undefined
+				diffEnabled?: boolean | undefined
+				fuzzyMatchThreshold?: number | undefined
+				modelTemperature?: (number | null) | undefined
+				rateLimitSeconds?: number | undefined
+				modelMaxTokens?: number | undefined
+				modelMaxThinkingTokens?: number | undefined
+				apiModelId?: string | undefined
+				apiKey?: string | undefined
+				anthropicBaseUrl?: string | undefined
+				anthropicUseAuthToken?: boolean | undefined
+				glamaModelId?: string | undefined
+				glamaApiKey?: string | undefined
+				openRouterApiKey?: string | undefined
+				openRouterModelId?: string | undefined
+				openRouterBaseUrl?: string | undefined
+				openRouterSpecificProvider?: string | undefined
+				openRouterUseMiddleOutTransform?: boolean | undefined
+				awsAccessKey?: string | undefined
+				awsSecretKey?: string | undefined
+				awsSessionToken?: string | undefined
+				awsRegion?: string | undefined
+				awsUseCrossRegionInference?: boolean | undefined
+				awsUsePromptCache?: boolean | undefined
+				awsProfile?: string | undefined
+				awsUseProfile?: boolean | undefined
+				awsCustomArn?: string | undefined
+				vertexKeyFile?: string | undefined
+				vertexJsonCredentials?: string | undefined
+				vertexProjectId?: string | undefined
+				vertexRegion?: string | undefined
+				openAiBaseUrl?: string | undefined
+				openAiApiKey?: string | undefined
+				openAiLegacyFormat?: boolean | undefined
+				openAiR1FormatEnabled?: boolean | undefined
+				openAiModelId?: string | undefined
+				openAiCustomModelInfo?:
+				| ({
+					maxTokens?: (number | null) | undefined
+					maxThinkingTokens?: (number | null) | undefined
+					contextWindow: number
+					supportsImages?: boolean | undefined
+					supportsComputerUse?: boolean | undefined
+					supportsPromptCache: boolean
+					inputPrice?: number | undefined
+					outputPrice?: number | undefined
+					cacheWritesPrice?: number | undefined
+					cacheReadsPrice?: number | undefined
+					description?: string | undefined
+					reasoningEffort?: ("low" | "medium" | "high") | undefined
+					thinking?: boolean | undefined
+					minTokensPerCachePoint?: number | undefined
+					maxCachePoints?: number | undefined
+					cachableFields?: string[] | undefined
+					tiers?:
+					| {
+						contextWindow: number
+						inputPrice?: number | undefined
+						outputPrice?: number | undefined
+						cacheWritesPrice?: number | undefined
+						cacheReadsPrice?: number | undefined
+					}[]
+					| undefined
+				} | null)
+				| undefined
+				openAiUseAzure?: boolean | undefined
+				azureApiVersion?: string | undefined
+				openAiStreamingEnabled?: boolean | undefined
+				enableReasoningEffort?: boolean | undefined
+				openAiHostHeader?: string | undefined
+				openAiHeaders?:
+				| {
+					[x: string]: string
+				}
+				| undefined
+				ollamaModelId?: string | undefined
+				ollamaBaseUrl?: string | undefined
+				vsCodeLmModelSelector?:
+				| {
+					vendor?: string | undefined
+					family?: string | undefined
+					version?: string | undefined
+					id?: string | undefined
+				}
+				| undefined
+				lmStudioModelId?: string | undefined
+				lmStudioBaseUrl?: string | undefined
+				lmStudioDraftModelId?: string | undefined
+				lmStudioSpeculativeDecodingEnabled?: boolean | undefined
+				geminiApiKey?: string | undefined
+				googleGeminiBaseUrl?: string | undefined
+				openAiNativeApiKey?: string | undefined
+				openAiNativeBaseUrl?: string | undefined
+				mistralApiKey?: string | undefined
+				mistralCodestralUrl?: string | undefined
+				deepSeekBaseUrl?: string | undefined
+				deepSeekApiKey?: string | undefined
+				unboundApiKey?: string | undefined
+				unboundModelId?: string | undefined
+				requestyApiKey?: string | undefined
+				requestyModelId?: string | undefined
+				fakeAi?: unknown | undefined
+				xaiApiKey?: string | undefined
+				groqApiKey?: string | undefined
+				chutesApiKey?: string | undefined
+				litellmBaseUrl?: string | undefined
+				litellmApiKey?: string | undefined
+				litellmModelId?: string | undefined
+				currentApiConfigName?: string | undefined
+				listApiConfigMeta?:
+				| {
+					id: string
+					name: string
+					apiProvider?:
+					| (
+						| "anthropic"
+						| "glama"
+						| "openrouter"
+						| "bedrock"
+						| "vertex"
+						| "openai"
+						| "ollama"
+						| "vscode-lm"
+						| "lmstudio"
+						| "gemini"
+						| "openai-native"
+						| "mistral"
+						| "deepseek"
+						| "unbound"
+						| "requesty"
+						| "human-relay"
+						| "fake-ai"
+						| "xai"
+						| "groq"
+						| "chutes"
+						| "litellm"
+					)
+					| undefined
+				}[]
+				| undefined
+				pinnedApiConfigs?:
+				| {
+					[x: string]: boolean
+				}
+				| undefined
+				lastShownAnnouncementId?: string | undefined
+				customInstructions?: string | undefined
+				taskHistory?:
+				| {
+					id: string
+					number: number
+					ts: number
+					task: string
+					tokensIn: number
+					tokensOut: number
+					cacheWrites?: number | undefined
+					cacheReads?: number | undefined
+					totalCost: number
+					size?: number | undefined
+					workspace?: string | undefined
+				}[]
+				| undefined
+				autoApprovalEnabled?: boolean | undefined
+				alwaysAllowReadOnly?: boolean | undefined
+				alwaysAllowReadOnlyOutsideWorkspace?: boolean | undefined
+				alwaysAllowWrite?: boolean | undefined
+				alwaysAllowWriteOutsideWorkspace?: boolean | undefined
+				writeDelayMs?: number | undefined
+				alwaysAllowBrowser?: boolean | undefined
+				alwaysApproveResubmit?: boolean | undefined
+				requestDelaySeconds?: number | undefined
+				alwaysAllowMcp?: boolean | undefined
+				alwaysAllowModeSwitch?: boolean | undefined
+				alwaysAllowSubtasks?: boolean | undefined
+				alwaysAllowExecute?: boolean | undefined
+				allowedCommands?: string[] | undefined
+				allowedMaxRequests?: number | undefined
+				autoCondenseContextPercent?: number | undefined
+				browserToolEnabled?: boolean | undefined
+				browserViewportSize?: string | undefined
+				screenshotQuality?: number | undefined
+				remoteBrowserEnabled?: boolean | undefined
+				remoteBrowserHost?: string | undefined
+				cachedChromeHostUrl?: string | undefined
+				enableCheckpoints?: boolean | undefined
+				ttsEnabled?: boolean | undefined
+				ttsSpeed?: number | undefined
+				soundEnabled?: boolean | undefined
+				soundVolume?: number | undefined
+				maxOpenTabsContext?: number | undefined
+				maxWorkspaceFiles?: number | undefined
+				showRooIgnoredFiles?: boolean | undefined
+				maxReadFileLine?: number | undefined
+				terminalOutputLineLimit?: number | undefined
+				terminalShellIntegrationTimeout?: number | undefined
+				terminalShellIntegrationDisabled?: boolean | undefined
+				terminalCommandDelay?: number | undefined
+				terminalPowershellCounter?: boolean | undefined
+				terminalZshClearEolMark?: boolean | undefined
+				terminalZshOhMy?: boolean | undefined
+				terminalZshP10k?: boolean | undefined
+				terminalZdotdir?: boolean | undefined
+				terminalCompressProgressBar?: boolean | undefined
+				experiments?:
+				| {
+					autoCondenseContext: boolean
+					powerSteering: boolean
+					enableMultiToolCalls: boolean
+				}
+				| undefined
+				language?:
+				| (
+					| "ca"
+					| "de"
+					| "en"
+					| "es"
+					| "fr"
+					| "hi"
+					| "it"
+					| "ja"
+					| "ko"
+					| "nl"
+					| "pl"
+					| "pt-BR"
+					| "ru"
+					| "tr"
+					| "vi"
+					| "zh-CN"
+					| "zh-TW"
+				)
+				| undefined
+				telemetrySetting?: ("unset" | "enabled" | "disabled") | undefined
+				mcpEnabled?: boolean | undefined
+				enableMcpServerCreation?: boolean | undefined
+				mode?: string | undefined
+				modeApiConfigs?:
+				| {
+					[x: string]: string
+				}
+				| undefined
+				customModes?:
+				| {
+					slug: string
+					name: string
+					roleDefinition: string
+					whenToUse?: string | undefined
+					customInstructions?: string | undefined
+					groups: (
+						| ("read" | "edit" | "browser" | "command" | "mcp" | "modes")
+						| [
+							"read" | "edit" | "browser" | "command" | "mcp" | "modes",
+							{
+								fileRegex?: string | undefined
+								description?: string | undefined
+							},
+						]
+					)[]
+					source?: ("global" | "project") | undefined
+				}[]
+				| undefined
+				customModePrompts?:
+				| {
+					[x: string]:
+					| {
+						roleDefinition?: string | undefined
+						whenToUse?: string | undefined
+						customInstructions?: string | undefined
+					}
+					| undefined
+				}
+				| undefined
+				customSupportPrompts?:
+				| {
+					[x: string]: string | undefined
+				}
+				| undefined
+				enhancementApiConfigId?: string | undefined
+				historyPreviewCollapsed?: boolean | undefined
+			}
+			text: string
+			images?: string[] | undefined
+			newTab?: boolean | undefined
+		}
+	}
+	| {
+		commandName: "CancelTask"
+		data: string
+	}
+	| {
+		commandName: "CloseTask"
+		data: string
+	}
+
+export type { TaskCommand }
+
+type TaskEvent =
+	| {
+		eventName: "message"
+		payload: [
+			{
+				taskId: string
+				action: "created" | "updated"
+				message: {
+					ts: number
+					type: "ask" | "say"
+					ask?:
+					| (
+						| "followup"
+						| "command"
+						| "command_output"
+						| "completion_result"
+						| "tool"
+						| "api_req_failed"
+						| "resume_task"
+						| "resume_completed_task"
+						| "mistake_limit_reached"
+						| "browser_action_launch"
+						| "use_mcp_server"
+						| "auto_approval_max_req_reached"
+					)
+					| undefined
+					say?:
+					| (
+						| "error"
+						| "api_req_started"
+						| "api_req_finished"
+						| "api_req_retried"
+						| "api_req_retry_delayed"
+						| "api_req_deleted"
+						| "text"
+						| "reasoning"
+						| "completion_result"
+						| "user_feedback"
+						| "user_feedback_diff"
+						| "command_output"
+						| "shell_integration_warning"
+						| "browser_action"
+						| "browser_action_result"
+						| "mcp_server_request_started"
+						| "mcp_server_response"
+						| "subtask_result"
+						| "checkpoint_saved"
+						| "rooignore_error"
+						| "diff_error"
+						| "condense_context"
+					)
+					| undefined
+					text?: string | undefined
+					images?: string[] | undefined
+					partial?: boolean | undefined
+					reasoning?: string | undefined
+					conversationHistoryIndex?: number | undefined
+					checkpoint?:
+					| {
+						[x: string]: unknown
+					}
+					| undefined
+					progressStatus?:
+					| {
+						icon?: string | undefined
+						text?: string | undefined
+					}
+					| undefined
+					contextCondense?:
+					| {
+						cost: number
+						prevContextTokens: number
+						newContextTokens: number
+						summary: string
+					}
+					| undefined
+				}
+			},
+		]
+	}
+	| {
+		eventName: "taskCreated"
+		payload: [string]
+	}
+	| {
+		eventName: "taskStarted"
+		payload: [string]
+	}
+	| {
+		eventName: "taskModeSwitched"
+		payload: [string, string]
+	}
+	| {
+		eventName: "taskPaused"
+		payload: [string]
+	}
+	| {
+		eventName: "taskUnpaused"
+		payload: [string]
+	}
+	| {
+		eventName: "taskAskResponded"
+		payload: [string]
+	}
+	| {
+		eventName: "taskAborted"
+		payload: [string]
+	}
+	| {
+		eventName: "taskSpawned"
+		payload: [string, string]
+	}
+	| {
+		eventName: "taskCompleted"
+		payload: [
+			string,
+			{
+				totalTokensIn: number
+				totalTokensOut: number
+				totalCacheWrites?: number | undefined
+				totalCacheReads?: number | undefined
+				totalCost: number
+				contextTokens: number
+			},
+			{
+				[x: string]: {
+					attempts: number
+					failures: number
+				}
+			},
+		]
+	}
+	| {
+		eventName: "taskTokenUsageUpdated"
+		payload: [
+			string,
+			{
+				totalTokensIn: number
+				totalTokensOut: number
+				totalCacheWrites?: number | undefined
+				totalCacheReads?: number | undefined
+				totalCost: number
+				contextTokens: number
+			},
+		]
+	}
 
 export type { TaskEvent }
