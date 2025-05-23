@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Maksimum token",
-		"maxThinkingTokens": "Maksimum düşünme tokeni"
+		"maxThinkingTokens": "Maksimum düşünme tokeni",
+		"manualControl": "Düşünme bütçesini manuel olarak kontrol et",
+		"manualControlDescription": "Düşünme tokeni sınırını manuel olarak ayarlıyorsunuz. Bu, modelin akıl yürütme yeteneğini kısıtlayabilir.",
+		"autoControlDescription": "Model kendi düşünme bütçesini otomatik olarak belirleyecektir. Bu genellikle en iyi performans gösteren seçenektir.",
+		"notSupportedDescription": "Bu sağlayıcı/model düşünme token limiti kontrolünü desteklemiyor."
 	},
 	"validation": {
 		"apiKey": "Geçerli bir API anahtarı sağlamalısınız.",

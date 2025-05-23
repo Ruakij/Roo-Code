@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Max tokens",
-		"maxThinkingTokens": "Max denk-tokens"
+		"maxThinkingTokens": "Max denk-tokens",
+		"manualControl": "Handmatig denkbudget beheren",
+		"manualControlDescription": "U stelt handmatig de limiet voor denk-tokens in. Dit kan het redeneervermogen van het model beperken.",
+		"autoControlDescription": "Het model bepaalt automatisch zijn eigen denkbudget. Dit is vaak de meest performante optie.",
+		"notSupportedDescription": "Deze provider/dit model ondersteunt geen denktokenlimiet controle."
 	},
 	"validation": {
 		"apiKey": "Je moet een geldige API-sleutel opgeven.",

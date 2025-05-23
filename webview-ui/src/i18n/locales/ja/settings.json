@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "最大 tokens",
-		"maxThinkingTokens": "最大思考 tokens"
+		"maxThinkingTokens": "最大思考 tokens",
+		"manualControl": "思考トークン制限を手動で制御",
+		"manualControlDescription": "思考トークン制限を手動で設定しています。",
+		"autoControlDescription": "プロバイダー/モデルが思考トークン制限を決定します。",
+		"notSupportedDescription": "このプロバイダー/モデルは思考tokenの制限制御をサポートしていません。"
 	},
 	"validation": {
 		"apiKey": "有効なAPIキーを入力してください。",

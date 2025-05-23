@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "अधिकतम tokens",
-		"maxThinkingTokens": "अधिकतम thinking tokens"
+		"maxThinkingTokens": "अधिकतम सोचने वाले tokens",
+		"manualControl": "सोचने वाले tokens की सीमा को मैन्युअल रूप से नियंत्रित करें",
+		"manualControlDescription": "आप सोचने वाले tokens की सीमा को मैन्युअल रूप से सेट कर रहे हैं।",
+		"autoControlDescription": "प्रदाता/मॉडल सोचने वाले tokens की सीमा निर्धारित करेगा।",
+		"notSupportedDescription": "यह प्रदाता सोचने वाले tokens के बजट नियंत्रण का समर्थन नहीं करता है।"
 	},
 	"validation": {
 		"apiKey": "आपको एक मान्य API कुंजी प्रदान करनी होगी।",

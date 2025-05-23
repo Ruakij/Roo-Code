@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "최대 tokens",
-		"maxThinkingTokens": "최대 사고 tokens"
+		"maxThinkingTokens": "최대 사고 tokens",
+		"manualControl": "수동으로 사고 예산 제어",
+		"manualControlDescription": "사고 토큰 제한을 수동으로 설정하고 있습니다. 이는 모델의 추론 능력을 제한할 수 있습니다.",
+		"autoControlDescription": "모델이 자체 사고 예산을 자동으로 결정합니다. 이는 종종 가장 성능이 좋은 옵션입니다.",
+		"notSupportedDescription": "이 제공자/모델은 사고 토큰 제한 제어를 지원하지 않습니다."
 	},
 	"validation": {
 		"apiKey": "유효한 API 키를 입력해야 합니다.",

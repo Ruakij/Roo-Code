@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Maksymalna liczba tokenów",
-		"maxThinkingTokens": "Maksymalna liczba tokenów myślenia"
+		"maxThinkingTokens": "Maksymalna liczba tokenów myślenia",
+		"manualControl": "Ręczne sterowanie budżetem myślenia",
+		"manualControlDescription": "Ręcznie ustawiasz limit tokenów myślenia. Może to ograniczyć zdolność rozumowania modelu.",
+		"autoControlDescription": "Model automatycznie określi swój własny budżet myślenia. Jest to często najbardziej wydajna opcja.",
+		"notSupportedDescription": "Ten dostawca/model nie obsługuje kontroli limitu tokenów myślenia."
 	},
 	"validation": {
 		"apiKey": "Musisz podać prawidłowy klucz API.",

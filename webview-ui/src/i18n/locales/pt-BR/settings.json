@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Tokens máximos",
-		"maxThinkingTokens": "Tokens máximos de pensamento"
+		"maxThinkingTokens": "Tokens máximos de pensamento",
+		"manualControl": "Controlar manualmente o limite de tokens de pensamento",
+		"manualControlDescription": "Você está definindo manualmente o limite de tokens de pensamento.",
+		"autoControlDescription": "O provedor/modelo determinará o limite de tokens de pensamento.",
+		"notSupportedDescription": "Este provedor não suporta controle de limite de tokens de pensamento."
 	},
 	"validation": {
 		"apiKey": "Você deve fornecer uma chave de API válida.",

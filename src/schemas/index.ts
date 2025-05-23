@@ -430,6 +430,7 @@ const baseProviderSettingsSchema = z.object({
 	// Claude 3.7 Sonnet Thinking
 	modelMaxTokens: z.number().optional(),
 	modelMaxThinkingTokens: z.number().optional(),
+	manualThinkingBudgetEnabled: z.boolean().optional(),
 })
 
 // Several of the providers share common model config properties.
@@ -699,6 +700,7 @@ const providerSettingsRecord: ProviderSettingsRecord = {
 	// Claude 3.7 Sonnet Thinking
 	modelMaxTokens: undefined,
 	modelMaxThinkingTokens: undefined,
+	manualThinkingBudgetEnabled: undefined,
 	// Generic
 	includeMaxTokens: undefined,
 	reasoningEffort: undefined,

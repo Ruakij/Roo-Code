@@ -118,6 +118,7 @@ export function getModelParams({
 	const {
 		modelMaxTokens: customMaxTokens,
 		modelMaxThinkingTokens: customMaxThinkingTokens,
+		manualThinkingBudgetEnabled,
 		modelTemperature: customTemperature,
 		reasoningEffort: customReasoningEffort,
 	} = options
@@ -126,16 +127,22 @@ export function getModelParams({
 	let thinking: BetaThinkingConfigParam | undefined = undefined
 	let temperature = customTemperature ?? defaultTemperature
 	const reasoningEffort = customReasoningEffort ?? defaultReasoningEffort
-
 	if (model.thinking) {
 		// Only honor `customMaxTokens` for thinking models.
 		maxTokens = customMaxTokens ?? maxTokens
 
-		// Clamp the thinking budget to be at most 80% of max tokens and at
-		// least 1024 tokens.
-		const maxBudgetTokens = Math.floor((maxTokens || ANTHROPIC_DEFAULT_MAX_TOKENS) * 0.8)
-		const budgetTokens = Math.max(Math.min(customMaxThinkingTokens ?? maxBudgetTokens, maxBudgetTokens), 1024)
-		thinking = { type: "enabled", budget_tokens: budgetTokens }
+		if (manualThinkingBudgetEnabled) {
+			// Manual mode: Set specific thinking budget
+			// Clamp the thinking budget to be at most 80% of max tokens and at
+			// least 1024 tokens.
+			const maxBudgetTokens = Math.floor((maxTokens || ANTHROPIC_DEFAULT_MAX_TOKENS) * 0.8)
+			const budgetTokens = Math.max(Math.min(customMaxThinkingTokens ?? maxBudgetTokens, maxBudgetTokens), 1024)
+			thinking = { type: "enabled", budget_tokens: budgetTokens }
+		} else {
+			// The provider/model will determine the thinking token limit
+			// by not setting the thinking parameter (or setting it to undefined)
+			thinking = undefined
+		}
 
 		// Anthropic "Thinking" models require a temperature of 1.0.
 		temperature = 1.0

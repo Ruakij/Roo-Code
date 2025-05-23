@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "最大Token数",
-		"maxThinkingTokens": "最大思考Token数"
+		"maxThinkingTokens": "最大思考Token数",
+		"manualControl": "手动控制思考Token限制",
+		"manualControlDescription": "您正在手动设置思考Token限制。",
+		"autoControlDescription": "由提供商/模型决定思考Token限制。",
+		"notSupportedDescription": "此提供商/模型不支持思维token限制控制。"
 	},
 	"validation": {
 		"apiKey": "您必须提供有效的 API 密钥。",

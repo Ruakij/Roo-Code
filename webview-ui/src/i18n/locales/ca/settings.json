@@ -496,8 +496,12 @@
 		}
 	},
 	"thinkingBudget": {
-		"maxTokens": "Tokens màxims",
-		"maxThinkingTokens": "Tokens de pensament màxims"
+		"maxTokens": "Màxim de fitxes",
+		"maxThinkingTokens": "Màxim de fitxes de pensament",
+		"manualControl": "Controlar manualment el límit de fitxes de pensament",
+		"manualControlDescription": "Estàs establint manualment el límit de fitxes de pensament.",
+		"autoControlDescription": "El proveïdor/model determinarà el límit de fitxes de pensament.",
+		"notSupportedDescription": "Aquest proveïdor/model no admet el control del pressupost de tokens de pensament."
 	},
 	"validation": {
 		"apiKey": "Heu de proporcionar una clau API vàlida.",

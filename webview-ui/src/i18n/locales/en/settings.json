@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Max Tokens",
-		"maxThinkingTokens": "Max Thinking Tokens"
+		"maxThinkingTokens": "Max Thinking Tokens",
+		"manualControl": "Manually control thinking token limit",
+		"manualControlDescription": "You are manually setting the thinking token limit.",
+		"autoControlDescription": "The provider/model will determine the thinking token limit.",
+		"notSupportedDescription": "This provider/model does not support thinking token limit."
 	},
 	"validation": {
 		"apiKey": "You must provide a valid API key.",

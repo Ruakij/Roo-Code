@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Tokens tối đa",
-		"maxThinkingTokens": "Tokens suy nghĩ tối đa"
+		"maxThinkingTokens": "Tokens suy nghĩ tối đa",
+		"manualControl": "Kiểm soát ngân sách suy nghĩ thủ công",
+		"manualControlDescription": "Bạn đang đặt giới hạn token suy nghĩ thủ công. Điều này có thể hạn chế khả năng suy luận của mô hình.",
+		"autoControlDescription": "Mô hình sẽ tự động xác định ngân sách suy nghĩ của riêng nó. Đây thường là tùy chọn hiệu quả nhất.",
+		"notSupportedDescription": "Nhà cung cấp/mô hình này không hỗ trợ kiểm soát giới hạn token suy nghĩ."
 	},
 	"validation": {
 		"apiKey": "Bạn phải cung cấp khóa API hợp lệ.",

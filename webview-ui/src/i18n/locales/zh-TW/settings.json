@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "最大 token 數",
-		"maxThinkingTokens": "最大思考 token 數"
+		"maxThinkingTokens": "最大思考 token 數",
+		"manualControl": "手動控制思考預算",
+		"manualControlDescription": "您正在手動設定思考 token 限制。這可能會限制模型的推論能力。",
+		"autoControlDescription": "模型將自動決定自己的思考預算。這通常是效能最佳的選項。",
+		"notSupportedDescription": "此提供商/模型不支援思維token限制控制。"
 	},
 	"validation": {
 		"apiKey": "請提供有效的 API 金鑰。",

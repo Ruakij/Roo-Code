@@ -239,6 +239,7 @@ type ProviderSettings = {
 	rateLimitSeconds?: number | undefined
 	modelMaxTokens?: number | undefined
 	modelMaxThinkingTokens?: number | undefined
+	manualThinkingBudgetEnabled?: boolean | undefined
 	apiModelId?: string | undefined
 	apiKey?: string | undefined
 	anthropicBaseUrl?: string | undefined
@@ -652,6 +653,7 @@ type IpcMessage =
 								rateLimitSeconds?: number | undefined
 								modelMaxTokens?: number | undefined
 								modelMaxThinkingTokens?: number | undefined
+								manualThinkingBudgetEnabled?: boolean | undefined
 								apiModelId?: string | undefined
 								apiKey?: string | undefined
 								anthropicBaseUrl?: string | undefined
@@ -1131,6 +1133,7 @@ type TaskCommand =
 					rateLimitSeconds?: number | undefined
 					modelMaxTokens?: number | undefined
 					modelMaxThinkingTokens?: number | undefined
+					manualThinkingBudgetEnabled?: boolean | undefined
 					apiModelId?: string | undefined
 					apiKey?: string | undefined
 					anthropicBaseUrl?: string | undefined

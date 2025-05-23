@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Tokens maximum",
-		"maxThinkingTokens": "Tokens de réflexion maximum"
+		"maxThinkingTokens": "Tokens de réflexion maximum",
+		"manualControl": "Contrôler manuellement la limite de tokens de réflexion",
+		"manualControlDescription": "Vous définissez manuellement la limite de tokens de réflexion.",
+		"autoControlDescription": "Le fournisseur/modèle déterminera la limite de tokens de réflexion.",
+		"notSupportedDescription": "Ce fournisseur/modèle ne prend pas en charge le contrôle du budget de tokens de réflexion."
 	},
 	"validation": {
 		"apiKey": "Vous devez fournir une clé API valide.",

@@ -497,7 +497,11 @@
 	},
 	"thinkingBudget": {
 		"maxTokens": "Maximale Tokens",
-		"maxThinkingTokens": "Maximale Thinking-Tokens"
+		"maxThinkingTokens": "Maximale Thinking-Tokens",
+		"manualControl": "Thinking-Token-Limit manuell steuern",
+		"manualControlDescription": "Du legst das Thinking-Token-Limit manuell fest.",
+		"autoControlDescription": "Der Provider/das Model bestimmt das Thinking-Token-Limit",
+		"notSupportedDescription": "Der Provider/das Model unterstützt keine Thinking-Token-Limit Einstellung."
 	},
 	"validation": {
 		"apiKey": "Du musst einen gültigen API-Schlüssel angeben.",
