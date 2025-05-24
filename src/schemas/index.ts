@@ -426,7 +426,13 @@ export type CommandExecutionStatus = z.infer<typeof commandExecutionStatusSchema
  * ExperimentId
  */
 
-export const experimentIds = ["autoCondenseContext", "powerSteering", "enableMultiToolCalls"] as const
+export const experimentIds = [
+	"autoCondenseContext",
+	"powerSteering",
+	"enableMultiToolCalls",
+	"blockWritingReadFiles",
+	"blockAttemptCompletionWithTools",
+] as const
 
 export const experimentIdsSchema = z.enum(experimentIds)
 
@@ -440,6 +446,8 @@ const experimentsSchema = z.object({
 	autoCondenseContext: z.boolean(),
 	powerSteering: z.boolean(),
 	enableMultiToolCalls: z.boolean(),
+	blockWritingReadFiles: z.boolean(),
+	blockAttemptCompletionWithTools: z.boolean(),
 })
 
 export type Experiments = z.infer<typeof experimentsSchema>

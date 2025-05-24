@@ -184,6 +184,7 @@ export class Task extends EventEmitter<ClineEvents> {
 	userMessageContentReady = false
 	didRejectTool = false
 	didCompleteReadingStream = false
+	attemptCompletionUsed = false
 
 	constructor({
 		provider,
@@ -1209,6 +1210,7 @@ export class Task extends EventEmitter<ClineEvents> {
 			this.userMessageContent = []
 			this.userMessageContentReady = false
 			this.didRejectTool = false
+			this.attemptCompletionUsed = false
 			this.presentAssistantMessageLocked = false
 			this.presentAssistantMessageHasPendingUpdates = false
 

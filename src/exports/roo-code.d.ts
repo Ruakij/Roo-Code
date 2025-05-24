@@ -134,6 +134,8 @@ type GlobalSettings = {
 				autoCondenseContext: boolean
 				powerSteering: boolean
 				enableMultiToolCalls: boolean
+				blockWritingReadFiles: boolean
+				blockAttemptCompletionWithTools: boolean
 		  }
 		| undefined
 	language?:
@@ -911,6 +913,8 @@ type IpcMessage =
 											autoCondenseContext: boolean
 											powerSteering: boolean
 											enableMultiToolCalls: boolean
+											blockWritingReadFiles: boolean
+											blockAttemptCompletionWithTools: boolean
 									  }
 									| undefined
 								language?:
@@ -1424,6 +1428,8 @@ type TaskCommand =
 								autoCondenseContext: boolean
 								powerSteering: boolean
 								enableMultiToolCalls: boolean
+								blockWritingReadFiles: boolean
+								blockAttemptCompletionWithTools: boolean
 						  }
 						| undefined
 					language?:

@@ -25,6 +25,8 @@ describe("experiments", () => {
 				powerSteering: false,
 				autoCondenseContext: false,
 				enableMultiToolCalls: false,
+				blockAttemptCompletionWithTools: false,
+				blockWritingReadFiles: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.POWER_STEERING)).toBe(false)
 		})
@@ -34,6 +36,8 @@ describe("experiments", () => {
 				powerSteering: true,
 				autoCondenseContext: false,
 				enableMultiToolCalls: false,
+				blockAttemptCompletionWithTools: false,
+				blockWritingReadFiles: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.POWER_STEERING)).toBe(true)
 		})
@@ -43,6 +47,8 @@ describe("experiments", () => {
 				powerSteering: false,
 				autoCondenseContext: false,
 				enableMultiToolCalls: false,
+				blockAttemptCompletionWithTools: false,
+				blockWritingReadFiles: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.POWER_STEERING)).toBe(false)
 		})
@@ -52,6 +58,8 @@ describe("experiments", () => {
 				powerSteering: false,
 				autoCondenseContext: false,
 				enableMultiToolCalls: false,
+				blockAttemptCompletionWithTools: false,
+				blockWritingReadFiles: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.AUTO_CONDENSE_CONTEXT)).toBe(false)
 		})
@@ -61,6 +69,8 @@ describe("experiments", () => {
 				powerSteering: false,
 				autoCondenseContext: true,
 				enableMultiToolCalls: false,
+				blockAttemptCompletionWithTools: false,
+				blockWritingReadFiles: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.AUTO_CONDENSE_CONTEXT)).toBe(true)
 		})
