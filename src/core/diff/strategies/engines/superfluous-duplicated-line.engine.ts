@@ -1,7 +1,15 @@
 import { SearchReplaceContext } from "../multi-search-replace"
 
 export class SuperfluousDuplicatedLineEngine {
-	public static process(originalContent: string, context: SearchReplaceContext): SearchReplaceContext {
+	/**
+	 * Processes a search/replace context to detect superfluous duplicated lines.
+	 *
+	 * @param originalContent The complete original content being modified
+	 * @param context The search/replace context containing startLine, searchContent, and replaceContent
+	 * @returns The number of additional lines from the original content that should be consumed
+	 *          to prevent duplication. Returns 0 if no additional lines should be consumed.
+	 */
+	public static process(originalContent: string, context: SearchReplaceContext): number {
 		const { startLine, searchContent, replaceContent } = context
 
 		// Early detection of superfluous duplicated line pattern
@@ -18,29 +26,38 @@ export class SuperfluousDuplicatedLineEngine {
 			const isFirstPartSimilar = firstPartOfReplace === searchContent
 
 			if (isFirstPartSimilar && replaceLines.length > searchLines.length) {
-				// Get the line that comes after the search block in replace content
-				const lineAfterSearchInReplace = replaceLines[searchLines.length]
+				// Check for any number of consecutive matching lines after the search block
+				let matchingLinesCount = 0
+				const searchEndIndex = startLine - 1 + searchLines.length
+				const maxPossibleMatches = Math.min(
+					replaceLines.length - searchLines.length, // Available lines in replace content
+					originalLines.length - searchEndIndex, // Available lines in original content after search
+				)
 
-				// Get the line that comes after the search block in original content
-				const lineIndexInOriginal = startLine - 1 + searchLines.length
-				if (lineIndexInOriginal < originalLines.length) {
-					const lineAfterSearchInOriginal = originalLines[lineIndexInOriginal]
+				for (let i = 0; i < maxPossibleMatches; i++) {
+					const replaceLineIndex = searchLines.length + i
+					const originalLineIndex = searchEndIndex + i
 
-					// If they match, it's likely a superfluous duplicated line scenario
-					// We can modify the search content to include the extra line
-					if (lineAfterSearchInReplace.trim() === lineAfterSearchInOriginal.trim()) {
-						const modifiedSearchContent = searchContent + "\n" + lineAfterSearchInOriginal
-						return {
-							startLine,
-							searchContent: modifiedSearchContent,
-							replaceContent,
-						}
+					const lineInReplace = replaceLines[replaceLineIndex]
+					const lineInOriginal = originalLines[originalLineIndex]
+
+					// Check if lines match (trimmed comparison to handle whitespace differences)
+					if (lineInReplace && lineInOriginal && lineInReplace.trim() === lineInOriginal.trim()) {
+						matchingLinesCount++
+					} else {
+						// Stop at the first non-matching line
+						break
 					}
+				}
+
+				// If we found any matching lines, return the count
+				if (matchingLinesCount > 0) {
+					return matchingLinesCount
 				}
 			}
 		}
 
-		// No modification needed, return as-is
-		return context
+		// No additional lines to consume
+		return 0
 	}
 }

@@ -401,7 +401,7 @@ Only use a single line of '=======' between search and replacement content, beca
 		let delta = 0
 		let diffResults: DiffResult[] = []
 		let appliedCount = 0
-		const replacements = matches
+		const replacements: SearchReplaceContext[] = matches
 			.map((match) => ({
 				startLine: Number(match[2] ?? 0),
 				searchContent: match[6],
@@ -412,19 +412,6 @@ Only use a single line of '=======' between search and replacement content, beca
 		for (const replacement of replacements) {
 			let { searchContent, replaceContent } = replacement
 			let startLine = replacement.startLine + (replacement.startLine === 0 ? 0 : delta)
-
-			// --- Start: Replacement Engine Processing ---
-			let context = SuperfluousDuplicatedLineEngine.process(originalContent, {
-				startLine,
-				searchContent,
-				replaceContent,
-			})
-
-			// Update variables from engine processing
-			startLine = context.startLine
-			searchContent = context.searchContent
-			replaceContent = context.replaceContent
-			// --- End: Replacement Engine Processing ---
 
 			// First unescape any escaped markers in the content
 			searchContent = this.unescapeMarkers(searchContent)
@@ -568,6 +555,19 @@ Only use a single line of '=======' between search and replacement content, beca
 				}
 			}
 
+			// --- Start: Replacement Engine Processing ---
+			// Now that we found the match, call the engine with the actual match location
+			const engineContext = {
+				startLine: matchIndex + 1, // Convert back to 1-based index for the engine
+				searchContent: replacement.searchContent,
+				replaceContent: replacement.replaceContent,
+			}
+			const additionalLinesToConsume = SuperfluousDuplicatedLineEngine.process(
+				resultLines.join("\n"),
+				engineContext,
+			)
+			// --- End: Replacement Engine Processing ---
+
 			// Get the matched lines from the original content
 			const matchedLines = resultLines.slice(matchIndex, matchIndex + searchLines.length)
 
@@ -609,7 +609,7 @@ Only use a single line of '=======' between search and replacement content, beca
 			})
 
 			// Initialize effectiveSearchLinesCount (determines how many lines from original are considered "replaced")
-			let effectiveSearchLinesCount = searchLines.length // Default
+			let effectiveSearchLinesCount = searchLines.length + additionalLinesToConsume
 
 			// Construct the final content
 			const beforeMatch = resultLines.slice(0, matchIndex)
