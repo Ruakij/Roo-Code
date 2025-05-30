@@ -2408,7 +2408,7 @@ function two() {
 		})
 	})
 
-	describe("MultiSearchReplaceDiffStrategy with generalized line duplication heuristic", () => {
+	describe("generalized line duplication heuristic", () => {
 		let strategy: MultiSearchReplaceDiffStrategy
 
 		beforeEach(() => {
@@ -2467,6 +2467,42 @@ New Appended Content
 Common Line to keep
 New Appended Content
 Section B`)
+		})
+
+		it("should correctly append content and avoid duplicating multiple lines with nested braces", async () => {
+			const originalContent = `function devConfig() {
+	return {
+		name: "test"
+	};
+}`
+
+			const diffContent = `<<<<<<< SEARCH
+		name: "test"
+=======
+		name: "test"
+	};
+}
+function prodConfig() {
+	return {
+		name: "prod"
+	};
+}
+>>>>>>> REPLACE`
+
+			const result = await strategy.applyDiff(originalContent, diffContent)
+
+			expect(result.success).toBe(true)
+			if (result.success)
+				expect(result.content).toBe(`function devConfig() {
+	return {
+		name: "test"
+	};
+}
+function prodConfig() {
+	return {
+		name: "prod"
+	};
+}`)
 		})
 
 		it("should not alter behavior when the line after search prefix in REPLACE differs from original line after SEARCH", async () => {
