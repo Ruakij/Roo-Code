@@ -588,11 +588,44 @@ Only use a single line of '=======' between search and replacement content, beca
 				return finalIndent + line.trim()
 			})
 
+			// Initialize effectiveSearchLinesCount (determines how many lines from original are considered "replaced")
+			let effectiveSearchLinesCount = searchLines.length // Default
+
+			// Heuristic to adjust effectiveSearchLinesCount for superfluous duplicated line pattern
+			if (searchLines.length > 0 && replaceLines.length > searchLines.length) {
+				const searchBlockContent = searchLines.join("\n")
+				// Ensure replaceLines has enough elements before slicing
+				const firstPartOfReplaceBlock = replaceLines.slice(0, searchLines.length).join("\n")
+
+				// Check if the search content is highly similar to the beginning of the replace content
+				if (getSimilarity(searchBlockContent, firstPartOfReplaceBlock) > 0.95) {
+					// Ensure there's a line in replaceLines immediately after the part that matches searchLines
+					if (searchLines.length < replaceLines.length) {
+						const lineInReplaceAfterPrefix = replaceLines[searchLines.length]
+
+						// Ensure there's a line in the original content (resultLines) immediately after the matched search block
+						if (matchIndex + searchLines.length < resultLines.length) {
+							const lineInOriginalAfterMatchedSearch = resultLines[matchIndex + searchLines.length]
+
+							// If the line in the replace block (after the prefix) is identical (ignoring leading/trailing whitespace)
+							// to the line in the original content (after the search match),
+							// it's likely a duplicated line scenario.
+							if (lineInReplaceAfterPrefix.trim() === lineInOriginalAfterMatchedSearch.trim()) {
+								effectiveSearchLinesCount = searchLines.length + 1 // Consume the duplicated line from the original
+							}
+						}
+					}
+				}
+			}
+
 			// Construct the final content
 			const beforeMatch = resultLines.slice(0, matchIndex)
-			const afterMatch = resultLines.slice(matchIndex + searchLines.length)
+			// Use effectiveSearchLinesCount here to determine the slice point
+			const afterMatch = resultLines.slice(matchIndex + effectiveSearchLinesCount)
+
 			resultLines = [...beforeMatch, ...indentedReplaceLines, ...afterMatch]
-			delta = delta - matchedLines.length + replaceLines.length
+			// Use effectiveSearchLinesCount for delta calculation
+			delta = delta - effectiveSearchLinesCount + replaceLines.length
 			appliedCount++
 		}
 		const finalContent = resultLines.join(lineEnding)
