@@ -439,7 +439,27 @@ export async function presentAssistantMessage(cline: Task) {
 				case "new_task":
 					await newTaskTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
 					break
-				case "attempt_completion":
+				case "attempt_completion": {
+					// Count how many tool uses are in this message
+					const toolUseCount = cline.assistantMessageContent.filter(
+						(block) => block.type === "tool_use",
+					).length
+
+					// If there's more than one tool use, prevent attempt_completion from executing
+					if (toolUseCount > 1) {
+						await cline.say(
+							"error",
+							"The 'attempt_completion' tool was used with other tools in the same response.",
+						)
+						pushToolResult(
+							formatResponse.toolError(
+								"The 'attempt_completion' tool cannot be used with other tools in the same response. Please make sure attempt_completion is the only tool in your response.",
+							),
+						)
+						cline.didRejectTool = true
+						break
+					}
+
 					await attemptCompletionTool(
 						cline,
 						block,
@@ -451,6 +471,7 @@ export async function presentAssistantMessage(cline: Task) {
 						askFinishSubTaskApproval,
 					)
 					break
+				}
 			}
 
 			break
