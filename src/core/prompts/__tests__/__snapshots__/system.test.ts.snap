@@ -17,7 +17,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -464,7 +464,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -896,8 +896,7 @@ Mock generic rules"
 
 exports[`SYSTEM_PROMPT should explicitly handle undefined mcpHub 1`] = `
 "You are Roo, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
-
-====
+	====
 
 MARKDOWN RULES
 
@@ -911,7 +910,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -1343,8 +1342,7 @@ Mock generic rules"
 
 exports[`SYSTEM_PROMPT should handle different browser viewport sizes 1`] = `
 "You are Roo, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
-
-====
+	====
 
 MARKDOWN RULES
 
@@ -1358,7 +1356,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -1861,7 +1859,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -2361,8 +2359,7 @@ Mock generic rules"
 
 exports[`SYSTEM_PROMPT should include browser actions when supportsComputerUse is true 1`] = `
 "You are Roo, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
-
-====
+	====
 
 MARKDOWN RULES
 
@@ -2376,7 +2373,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -2864,8 +2861,7 @@ Mock generic rules"
 
 exports[`SYSTEM_PROMPT should include diff strategy tool description when diffEnabled is true 1`] = `
 "You are Roo, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
-
-====
+	====
 
 MARKDOWN RULES
 
@@ -2879,7 +2875,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -3414,7 +3410,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -3888,8 +3884,7 @@ Mock generic rules"
 
 exports[`addCustomInstructions should exclude MCP server creation info when disabled 1`] = `
 "You are Roo, a highly skilled software engineer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.
-
-====
+	====
 
 MARKDOWN RULES
 
@@ -3903,7 +3898,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -4412,8 +4407,7 @@ Mock generic rules"
 
 exports[`addCustomInstructions should generate correct prompt for architect mode 1`] = `
 "You are Roo, an experienced technical leader who is inquisitive and an excellent planner. Your goal is to gather information and get context to create a detailed plan for accomplishing the user's task, which the user will review and approve before they switch into another mode to implement the solution.
-
-====
+	====
 
 MARKDOWN RULES
 
@@ -4427,7 +4421,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -4865,7 +4859,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
@@ -5220,7 +5214,7 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 # Tool Use Formatting
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
+Tool uses are formatted using XML-style tags.The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags.Here's the structure:
 
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
