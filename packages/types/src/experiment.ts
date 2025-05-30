@@ -7,9 +7,11 @@ import type { Keys, Equals, AssertEqual } from "./type-fu.js"
  */
 
 export const experimentIds = [
+	"autoCondenseContext",
 	"powerSteering",
 	"enableMultiToolCalls",
-	"autoCondenseContext",
+	"blockWritingReadFiles",
+	"blockAttemptCompletionWithTools",
 ] as const
 
 export const experimentIdsSchema = z.enum(experimentIds)
@@ -24,6 +26,8 @@ export const experimentsSchema = z.object({
 	powerSteering: z.boolean(),
 	enableMultiToolCalls: z.boolean(),
 	autoCondenseContext: z.boolean(),
+	blockWritingReadFiles: z.boolean(),
+	blockAttemptCompletionWithTools: z.boolean(),
 })
 
 export type Experiments = z.infer<typeof experimentsSchema>
