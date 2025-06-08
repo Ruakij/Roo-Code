@@ -307,6 +307,18 @@ export async function presentAssistantMessage(cline: Task) {
 				TelemetryService.instance.captureToolUsage(cline.taskId, block.name)
 			}
 
+			// Check if attempt_completion was used previously and block all subsequent tools
+			if (block.name !== "attempt_completion" && cline.attemptCompletionUsed) {
+				await cline.say("error", "No tools can be used after attempt_completion in the same response.")
+				pushToolResult(
+					formatResponse.toolError(
+						"No tools can be used after attempt_completion in the same response. Please make sure attempt_completion is the only tool in your response.",
+					),
+				)
+				cline.didRejectTool = true
+				break
+			}
+
 			// Validate tool use before execution.
 			const { mode, customModes } = (await cline.providerRef.deref()?.getState()) ?? {}
 
@@ -473,13 +485,20 @@ export async function presentAssistantMessage(cline: Task) {
 					await newTaskTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
 					break
 				case "attempt_completion": {
+					// Track that attempt_completion was used
+					cline.attemptCompletionUsed = true
+
+					// Check if blocking is enabled in experiments
+					const experimentsConfig = (await cline.providerRef.deref()?.getState())?.experiments
+					const blockingEnabled = experimentsConfig?.blockAttemptCompletionWithTools ?? true
+
 					// Count how many tool uses are in this message
 					const toolUseCount = cline.assistantMessageContent.filter(
 						(block) => block.type === "tool_use",
 					).length
 
-					// If there's more than one tool use, prevent attempt_completion from executing
-					if (toolUseCount > 1) {
+					// If blocking is enabled and there's more than one tool use, prevent attempt_completion from executing
+					if (blockingEnabled && toolUseCount > 1) {
 						await cline.say(
 							"error",
 							"The 'attempt_completion' tool was used with other tools in the same response.",

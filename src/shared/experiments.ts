@@ -4,6 +4,8 @@ export const EXPERIMENT_IDS = {
 	POWER_STEERING: "powerSteering",
 	CONCURRENT_FILE_READS: "concurrentFileReads",
 	ENABLE_MULTI_TOOL_CALLS: "enableMultiToolCalls",
+	BLOCK_WRITING_READ_FILES: "blockWritingReadFiles",
+	BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS: "blockAttemptCompletionWithTools",
 	AUTO_CONDENSE_CONTEXT: "autoCondenseContext",
 } as const satisfies Record<string, ExperimentId>
 
@@ -19,6 +21,8 @@ export const experimentConfigsMap: Record<ExperimentKey, ExperimentConfig> = {
 	POWER_STEERING: { enabled: false },
 	CONCURRENT_FILE_READS: { enabled: false },
 	ENABLE_MULTI_TOOL_CALLS: { enabled: false },
+	BLOCK_WRITING_READ_FILES: { enabled: false },
+	BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS: { enabled: true },
 	AUTO_CONDENSE_CONTEXT: { enabled: false }, // Keep this last, there is a slider below it in the UI
 }
 
