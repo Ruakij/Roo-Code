@@ -365,22 +365,55 @@ export async function presentAssistantMessage(cline: Task) {
 				}
 			}
 
+			// Track files that have been read in this message
+			const filesReadInMessage = new Set<string>()
+
+			// Fill filesReadInMessage with any read_file operations in this message
+			for (const messageBlock of cline.assistantMessageContent) {
+				if (messageBlock.type === "tool_use" && messageBlock.name === "read_file" && messageBlock.params.path) {
+					filesReadInMessage.add(messageBlock.params.path)
+				}
+			}
+
+			// Helper function to check if a file modification should be blocked
+			const shouldBlockFileModification = async (path: string | undefined): Promise<boolean> => {
+				if (!path) return false
+				if (filesReadInMessage.has(path)) {
+					await cline.say("error", `Cannot modify file '${path}' that was read in the same response.`)
+					pushToolResult(
+						formatResponse.toolError(
+							"Modifying a file that was read in the same response is not allowed. Please split read and write operations into separate responses.",
+						),
+					)
+					cline.didRejectTool = true
+					return true
+				}
+				return false
+			}
+
 			switch (block.name) {
-				case "write_to_file":
+				case "write_to_file": {
+					if (await shouldBlockFileModification(block.params.path)) break
 					await writeToFileTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
 					break
-				case "apply_diff":
+				}
+				case "apply_diff": {
+					if (await shouldBlockFileModification(block.params.path)) break
 					await applyDiffTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
 					break
-				case "insert_content":
+				}
+				case "insert_content": {
+					if (await shouldBlockFileModification(block.params.path)) break
 					await insertContentTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
 					break
-				case "search_and_replace":
+				}
+				case "search_and_replace": {
+					if (await shouldBlockFileModification(block.params.path)) break
 					await searchAndReplaceTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
 					break
+				}
 				case "read_file":
 					await readFileTool(cline, block, askApproval, handleError, pushToolResult, removeClosingTag)
-
 					break
 				case "fetch_instructions":
 					await fetchInstructionsTool(cline, block, askApproval, handleError, pushToolResult)
