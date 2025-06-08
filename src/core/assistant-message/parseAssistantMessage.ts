@@ -14,6 +14,9 @@ export function parseAssistantMessage(assistantMessage: string): AssistantMessag
 	let currentParamValueStartIndex = 0
 	let accumulator = ""
 
+	// Pre-compute possible tool tags for reuse
+	const possibleToolUseOpeningTags = toolNames.map((name) => `<${name}>`)
+
 	for (let i = 0; i < assistantMessage.length; i++) {
 		const char = assistantMessage[i]
 		accumulator += char
@@ -43,6 +46,35 @@ export function parseAssistantMessage(assistantMessage: string): AssistantMessag
 				currentToolUse.partial = false
 				contentBlocks.push(currentToolUse)
 				currentToolUse = undefined
+
+				// After a tool block ends, check if there's another tool block starting
+				let nextToolFound = false
+				const remainingText = accumulator.slice(i + 1)
+				for (const nextToolTag of possibleToolUseOpeningTags) {
+					if (remainingText.startsWith(nextToolTag)) {
+						// Found next tool tag, set up for parsing it
+						currentToolUse = {
+							type: "tool_use",
+							name: nextToolTag.slice(1, -1) as ToolName,
+							params: {},
+							partial: true,
+						}
+						currentToolUseStartIndex = i + 1 + nextToolTag.length
+						nextToolFound = true
+						i += nextToolTag.length
+						break
+					}
+				}
+
+				if (!nextToolFound) {
+					// No immediate next tool tag, start collecting text content
+					currentTextContentStartIndex = i + 1
+					currentTextContent = {
+						type: "text",
+						content: "",
+						partial: true,
+					}
+				}
 				continue
 			} else {
 				const possibleParamOpeningTags = toolParamNames.map((name) => `<${name}>`)
@@ -86,8 +118,6 @@ export function parseAssistantMessage(assistantMessage: string): AssistantMessag
 		// No currentToolUse.
 
 		let didStartToolUse = false
-		const possibleToolUseOpeningTags = toolNames.map((name) => `<${name}>`)
-
 		for (const toolUseOpeningTag of possibleToolUseOpeningTags) {
 			if (accumulator.endsWith(toolUseOpeningTag)) {
 				// Start of a new tool use.

@@ -4,6 +4,7 @@ import * as os from "os"
 import type { ModeConfig, PromptComponent, CustomModePrompts } from "@roo-code/types"
 
 import { Mode, modes, defaultModeSlug, getModeBySlug, getGroupName, getModeSelection } from "../../shared/modes"
+import { EXPERIMENT_IDS, experiments as Experiments } from "../../shared/experiments"
 import { DiffStrategy } from "../../shared/tools"
 import { formatLanguage } from "../../shared/language"
 
@@ -65,27 +66,28 @@ async function generatePrompt(
 
 	const codeIndexManager = CodeIndexManager.getInstance(context)
 
+	const enableMultiToolCalls = Experiments.isEnabled(experiments ?? {}, EXPERIMENT_IDS.ENABLE_MULTI_TOOL_CALLS)
+
 	const basePrompt = `${roleDefinition}
+	${markdownFormattingSection()}
 
-${markdownFormattingSection()}
-
-${getSharedToolUseSection()}
+${getSharedToolUseSection(enableMultiToolCalls)}
 
 ${getToolDescriptionsForMode(
-	mode,
-	cwd,
-	supportsComputerUse,
-	codeIndexManager,
-	effectiveDiffStrategy,
-	browserViewportSize,
-	mcpHub,
-	customModeConfigs,
-	experiments,
-	partialReadsEnabled,
-	settings,
-)}
+		mode,
+		cwd,
+		supportsComputerUse,
+		codeIndexManager,
+		effectiveDiffStrategy,
+		browserViewportSize,
+		mcpHub,
+		customModeConfigs,
+		experiments,
+		partialReadsEnabled,
+		settings,
+	)}
 
-${getToolUseGuidelinesSection(codeIndexManager)}
+${getToolUseGuidelinesSection(codeIndexManager, enableMultiToolCalls)}
 
 ${mcpServersSection}
 

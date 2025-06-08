@@ -1,6 +1,6 @@
 import { CodeIndexManager } from "../../../services/code-index/manager"
 
-export function getToolUseGuidelinesSection(codeIndexManager?: CodeIndexManager): string {
+export function getToolUseGuidelinesSection(codeIndexManager?: CodeIndexManager, enableMultiToolCalls?: boolean): string {
 	const isCodebaseSearchAvailable = codeIndexManager &&
 		codeIndexManager.isFeatureEnabled &&
 		codeIndexManager.isFeatureConfigured &&
@@ -21,8 +21,14 @@ export function getToolUseGuidelinesSection(codeIndexManager?: CodeIndexManager)
 		guidelinesList.push(`${itemNumber++}. Choose the most appropriate tool based on the task and the tool descriptions provided. Assess if you need additional information to proceed, and which of the available tools would be most effective for gathering this information. For example using the list_files tool is more effective than running a command like \`ls\` in the terminal. It's critical that you think about each available tool and use the one that best fits the current step in the task.`);
 	}
 
+	// Multi-tool calls guideline
+	if (enableMultiToolCalls) {
+		guidelinesList.push(`${itemNumber++}. If multiple actions are needed, you can use multiple tools in a single message to accomplish the task iteratively. Each step can involve parallel tool uses. You may not attempt completion after you ran other tools before! Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.`);
+	} else {
+		guidelinesList.push(`${itemNumber++}. If multiple actions are needed, use one tool at a time per message to accomplish the task iteratively, with each tool use being informed by the result of the previous tool use. Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.`);
+	}
+
 	// Remaining guidelines
-	guidelinesList.push(`${itemNumber++}. If multiple actions are needed, use one tool at a time per message to accomplish the task iteratively, with each tool use being informed by the result of the previous tool use. Do not assume the outcome of any tool use. Each step must be informed by the previous step's result.`);
 	guidelinesList.push(`${itemNumber++}. Formulate your tool use using the XML format specified for each tool.`);
 	guidelinesList.push(`${itemNumber++}. After each tool use, the user will respond with the result of that tool use. This result will provide you with the necessary information to continue your task or make further decisions. This response may include:
   - Information about whether the tool succeeded or failed, along with any reasons for failure.

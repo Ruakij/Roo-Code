@@ -19,7 +19,8 @@ describe("experiments", () => {
 			const experiments: Record<ExperimentId, boolean> = {
 				powerSteering: false,
 				concurrentFileReads: false,
-				disableCompletionCommand: false,
+				enableMultiToolCalls: false,
+				autoCondenseContext: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.POWER_STEERING)).toBe(false)
 		})
@@ -28,7 +29,8 @@ describe("experiments", () => {
 			const experiments: Record<ExperimentId, boolean> = {
 				powerSteering: true,
 				concurrentFileReads: false,
-				disableCompletionCommand: false,
+				enableMultiToolCalls: false,
+				autoCondenseContext: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.POWER_STEERING)).toBe(true)
 		})
@@ -37,9 +39,30 @@ describe("experiments", () => {
 			const experiments: Record<ExperimentId, boolean> = {
 				powerSteering: false,
 				concurrentFileReads: false,
-				disableCompletionCommand: false,
+				enableMultiToolCalls: false,
+				autoCondenseContext: false,
 			}
 			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.POWER_STEERING)).toBe(false)
+		})
+
+		it("returns false when AUTO_CONDENSE_CONTEXT experiment is not enabled", () => {
+			const experiments: Record<ExperimentId, boolean> = {
+				powerSteering: false,
+				concurrentFileReads: false,
+				autoCondenseContext: false,
+				enableMultiToolCalls: false,
+			}
+			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.AUTO_CONDENSE_CONTEXT)).toBe(false)
+		})
+
+		it("returns true when AUTO_CONDENSE_CONTEXT experiment is enabled", () => {
+			const experiments: Record<ExperimentId, boolean> = {
+				powerSteering: false,
+				concurrentFileReads: false,
+				autoCondenseContext: true,
+				enableMultiToolCalls: false,
+			}
+			expect(Experiments.isEnabled(experiments, EXPERIMENT_IDS.AUTO_CONDENSE_CONTEXT)).toBe(true)
 		})
 	})
 })

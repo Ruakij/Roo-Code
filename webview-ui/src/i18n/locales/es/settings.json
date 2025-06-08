@@ -485,6 +485,10 @@
 			"name": "Usar modo experimental de \"dirección asistida\"",
 			"description": "Cuando está habilitado, Roo recordará al modelo los detalles de su definición de modo actual con más frecuencia. Esto llevará a una mayor adherencia a las definiciones de roles e instrucciones personalizadas, pero usará más tokens por mensaje."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Usar modo experimental de llamadas múltiples a herramientas",
+			"description": "Si está activado, Roo puede usar varias herramientas independientes por mensaje en paralelo. Los resultados de todas las herramientas utilizadas se devuelven juntos en la respuesta al usuario. Las tareas se realizan paso a paso, y cada paso puede emplear varias herramientas a la vez. Esta función es experimental."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Usar herramienta experimental de diff de bloques múltiples",
 			"description": "Cuando está habilitado, Roo usará la herramienta de diff de bloques múltiples. Esto intentará actualizar múltiples bloques de código en el archivo en una sola solicitud."

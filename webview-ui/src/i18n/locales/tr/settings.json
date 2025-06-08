@@ -485,6 +485,10 @@
 			"name": "Deneysel \"güç direksiyon\" modunu kullan",
 			"description": "Etkinleştirildiğinde, Roo modele geçerli mod tanımının ayrıntılarını daha sık hatırlatacaktır. Bu, rol tanımlarına ve özel talimatlara daha güçlü uyum sağlayacak, ancak mesaj başına daha fazla token kullanacaktır."
 		},
+		"ENABLE_MULTI_TOOL_CALLS": {
+			"name": "Deneysel çoklu araç çağrısı modunu etkinleştir",
+			"description": "Etkinleştirildiğinde Roo, her mesajda birden fazla bağımsız aracı paralel olarak kullanabilir. Kullanılan tüm araçların sonuçları, kullanıcı yanıtında birlikte döndürülür. Görevler adım adım gerçekleştirilir ve her adımda birden fazla araç aynı anda kullanılabilir. Bu özellik deneyseldir."
+		},
 		"MULTI_SEARCH_AND_REPLACE": {
 			"name": "Deneysel çoklu blok diff aracını kullan",
 			"description": "Etkinleştirildiğinde, Roo çoklu blok diff aracını kullanacaktır. Bu, tek bir istekte dosyadaki birden fazla kod bloğunu güncellemeye çalışacaktır."
