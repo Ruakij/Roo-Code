@@ -1,14 +1,14 @@
 import { getAttemptCompletionDescription } from "../attempt-completion"
 import { EXPERIMENT_IDS } from "../../../../shared/experiments"
 
-describe("getAttemptCompletionDescription - DISABLE_COMPLETION_COMMAND experiment", () => {
+describe("getAttemptCompletionDescription - BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS experiment", () => {
 	describe("when experiment is disabled (default)", () => {
 		it("should include command parameter in the description", () => {
 			const args = {
 				cwd: "/test/path",
 				supportsComputerUse: false,
 				experiments: {
-					[EXPERIMENT_IDS.DISABLE_COMPLETION_COMMAND]: false,
+					[EXPERIMENT_IDS.BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS]: false,
 				},
 			}
 
@@ -53,7 +53,7 @@ describe("getAttemptCompletionDescription - DISABLE_COMPLETION_COMMAND experimen
 				cwd: "/test/path",
 				supportsComputerUse: false,
 				experiments: {
-					[EXPERIMENT_IDS.DISABLE_COMPLETION_COMMAND]: true,
+					[EXPERIMENT_IDS.BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS]: true,
 				},
 			}
 
@@ -77,7 +77,7 @@ describe("getAttemptCompletionDescription - DISABLE_COMPLETION_COMMAND experimen
 				cwd: "/test/path",
 				supportsComputerUse: false,
 				experiments: {
-					[EXPERIMENT_IDS.DISABLE_COMPLETION_COMMAND]: true,
+					[EXPERIMENT_IDS.BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS]: true,
 				},
 			}
 
@@ -96,7 +96,7 @@ describe("getAttemptCompletionDescription - DISABLE_COMPLETION_COMMAND experimen
 				cwd: "/test/path",
 				supportsComputerUse: false,
 				experiments: {
-					[EXPERIMENT_IDS.DISABLE_COMPLETION_COMMAND]: false,
+					[EXPERIMENT_IDS.BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS]: false,
 				},
 			}
 
@@ -104,7 +104,7 @@ describe("getAttemptCompletionDescription - DISABLE_COMPLETION_COMMAND experimen
 				cwd: "/test/path",
 				supportsComputerUse: false,
 				experiments: {
-					[EXPERIMENT_IDS.DISABLE_COMPLETION_COMMAND]: true,
+					[EXPERIMENT_IDS.BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS]: true,
 				},
 			}
 

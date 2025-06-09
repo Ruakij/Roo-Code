@@ -74,7 +74,7 @@ export async function attemptCompletionTool(
 			const experimentsConfig = state?.experiments ?? experimentDefault
 			const isCommandDisabled = experiments.isEnabled(
 				experimentsConfig,
-				EXPERIMENT_IDS.DISABLE_COMPLETION_COMMAND,
+				EXPERIMENT_IDS.BLOCK_ATTEMPT_COMPLETION_WITH_TOOLS,
 			)
 
 			if (command && !isCommandDisabled) {
